@@ -16,11 +16,14 @@ echo "$WALLPAPER_LS -----"
 echo "$WALLPAPER_PT -----"
 # Apply the selected wallpaper
 # killall hyprpaper & hyprpaper
-hyprctl hyprpaper reload DP-2,"$WALLPAPER_PT"
-hyprctl hyprpaper reload HDMI-A-1,"$WALLPAPER_LS"
+# hyprctl hyprpaper reload DP-2,"$WALLPAPER_PT"
+# hyprctl hyprpaper reload HDMI-A-1,"$WALLPAPER_LS"
 # swww img "$WALLPAPER_PT" --transition-type center
+swww img -o DP-2 "$WALLPAPER_PT" --transition-type random
+# swww img -o DP-2 "$WALLPAPER_PT" --transition-type wipe --transition-angle 45 --transition-step 90
+# swww img -o HDMI-A-1 "$WALLPAPER_LS" --transition-type center
+swww img -o HDMI-A-1 "$WALLPAPER_LS" --transition-type wipe --transition-angle 45
 
 
 
 
-# hyprctl hyprpaper wallpaper "DP-1,$WALLPAPER_PT"
