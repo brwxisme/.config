@@ -1,0 +1,198 @@
+@define-color blue #04d1f9;
+@define-color green #37f499;
+@define-color dark #212337;
+@define-color notdark #323449;
+@define-color orange #f7c67f;
+@define-color pinkpurple #a48cf2;
+@define-color darkpurple #7081d0;
+@define-color purple #7081d0;
+@define-color pink #f265b5;
+@define-color red #f16c75;
+@define-color yellow #f1fc79;
+* {
+    font-family: "FiraCode Nerd Font";
+    /*font-family: "JetBrainsMono Nerd Font";*/
+    font-weight: bold; 
+    font-size: 12px;
+}
+
+#custom-notification {
+  font-family: "FiraCode Nerd Font";
+  font-size: 12px;
+ color: #A1BDCE;
+ margin: 0px 0px 0px 0px;
+}
+
+window#waybar {
+background: @dark;
+ border: 2px solid @purple;
+ border-radius: 8px;
+ min-height : 30px;
+ /* border-top: 0px; */
+ /* border-radius: 0px 0px 8px 8px ; */
+}
+
+tooltip {
+    background: #323449;
+    font-size: 12px;
+    border-radius: 7px;
+    padding: 0px 12px 0px 12px;
+    border: 2px solid @purple;
+    color: pink;
+}
+tooltip label{
+    color : white;
+    padding: 0px 16px;
+}
+
+#workspaces{
+border: 0px solid #FFF;
+/* padding-left : 8px; */
+/* padding-right : 8px; */
+padding : 4px;
+    font-size : 8px;
+}
+#workspaces button {
+    color : @purple;
+    padding: 0px 4px 0px 4px ;
+}
+#workspaces button.persistent{
+    color: @purple;
+}
+#workspaces button.empty{
+    color : @purple;
+}
+#workspaces button.active{
+    color: @green;
+}
+#workspaces button:hover {
+    color : @green;
+    border-color : rgba(0,0,0,0);
+    /* background-color : transparent; */
+    /* background: none; */
+    /* border: 0px; */
+    /* margin:0px; */
+    /* border-top: 0px; */
+}
+
+
+#tray{
+    color:#fff;
+}
+#tray > .passive{
+  color: #ffffff;
+}
+#tray menu {
+     background-color: @dark;
+    font-size: 12px;
+    color: @blue;
+    /* border: 2px solid @purple; */
+    /* border-radius : 8px; */
+}
+
+#tray menu separator {
+    min-height: 8px;
+    background-color: @notdark;
+}
+
+
+#idle_inhibitor{
+color: #24966e;
+    background : @bar-bg;
+    opacity: 1;
+    margin: 4px 0px 4px 0px;
+    padding-left: 4px;
+    padding-right: 4px;
+
+}
+#clock,
+#cpu,
+#memory,
+#custom-session,
+#custom-eyedropper,
+#custom-separator,
+#custom-wallpaper,
+#pulseaudio{
+    font-size: 12px;
+    padding: 1px 0px 0px 0px;
+    min-width : 52px;
+    /* background: rgba(23, 23, 23, 0.0); */
+    
+}
+#clock{
+    color: @green;
+}
+#pulseaudio{
+    /* color: @green; */
+    color: @green;
+}
+#cpu{
+    color: @pink;
+}
+#memory{
+    color: @yellow;
+
+}
+#network{
+color: #A1BDCE;
+font-weight: normal;
+font-size: 12px;
+padding-right: 4px;
+padding-left: 4px
+}
+
+#custom-expand {
+    min-width: 12px;
+    color: #A1BDCE;
+    font-size: 12px;
+}
+
+
+#custom-session{
+color: @red;
+    min-width: 12px;
+/* padding-top: 2px; */
+}
+#custom-eyedropper{
+color: #FFF;
+min-width :32px;
+/* padding-top: 2px; */
+}
+#custom-separator{
+    color: @purple;
+min-width :12px;
+padding-top: 2px;
+padding-left : 8px;
+}
+
+#custom-wallpaper{
+color: @yellow;
+    min-width: 16px;
+/* padding-top: 2px; */
+}
+#pulseaudio-slider {
+    border-color : #37f499;
+}
+#pulseaudio-slider slider {
+    min-height: 4px;
+    min-width: 4px;
+    opacity: 0;
+    border: none;
+    box-shadow: none;
+
+}
+#pulseaudio-slider trough {
+    min-height: 8px;
+    min-width: 80px;
+    border-radius: 5px;
+    border: 2px solid #7081d0;
+
+}
+#pulseaudio-slider highlight {
+    /* min-height: 8px; */
+    /* border-radius: 5px; */
+    /* border: 2px solid pink; */
+    border: 2px solid #7081d0;
+    background: #37f499;
+    
+}
