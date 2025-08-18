@@ -20,11 +20,15 @@
 // positions generated based on config.ctl //
 
 	"modules-left": [
-            "hyprland/workspaces",
+            // "hyprland/workspaces",
             "custom/spacer",
+            "hyprland/workspaces",
+            // "clock",
             "mpris"],
 	// "modules-center": ["custom/padd","custom/l_end","custom/r_end","hyprland/window","custom/padd"],
 	"modules-center": [
+            // "hyprland/workspaces",
+            "custom/os",
             "clock",
            ],
 	"modules-right": [
@@ -63,47 +67,23 @@
 "tray": {
         "icon-size": 14,
         "rotate": 0,
-        "spacing": 6
-    },
+        "spacing": 6,
+        "show-passive-items":true,
+},
 
-   "group/expand": {
+"group/expand": {
      "orientation": "horizontal",
      "modules": ["tray"]
-   },
+},
 
  
-
-"custom/notification": {
-    "tooltip": false,
-    "format": "{icon}",
-    "format-icons": {
-      "notification": "󰅸",
-      "none": "󰂜",
-      "dnd-notification": "󰅸",
-      "dnd-none": "󱏨",
-      "inhibited-notification": "󰅸",
-      "inhibited-none": "󰂜",
-      "dnd-inhibited-notification": "󰅸",
-      "dnd-inhibited-none": "󱏨"
-    },
-    "return-type": "json",
-    "exec-if": "which swaync-client",
-    "exec": "swaync-client -swb",
-    "on-click-right": "swaync-client -d -sw",
-    "on-click": "swaync-client -t -sw",
-    "escape": true
-  },
 "hyprland/workspaces": {
 	"format": "{icon}",
 	"format-icons": {
 	"default": "",
         "empty": "",
 	"active": "",
-	//"default": "○",
-	//"default": "●"
 	},
-// "active-only": false,
-// "all-outputs": true,
   "persistent-workspaces": {
              "DP-2": 5, // 5 workspaces by default on every monitor
              "HDMI-A-1": 5 // but only three on HDMI-A-1
@@ -117,6 +97,7 @@
             "deactivated": ""
         }
     },
+
     "clock": {
         "format": "{:%A, %H:%M}",
         "rotate": 0,
@@ -141,40 +122,28 @@
         }
     },
 
-    "network": {
-        "tooltip": true,
-        "format-wifi": "{icon} ",
-        "format-icons": ["󰤟", "󰤢", "󰤥"],
-      //  "format-wifi": "<i class='fa-solid fa-wifi-slash'></i>",
-        "rotate": 0,
-        "format-ethernet": "󰈀 ",
-        "tooltip-format": "Network: <big><b>{essid}</b></big>\nSignal strength: <b>{signaldBm}dBm ({signalStrength}%)</b>\nFrequency: <b>{frequency}MHz</b>\nInterface: <b>{ifname}</b>\nIP: <b>{ipaddr}/{cidr}</b>\nGateway: <b>{gwaddr}</b>\nNetmask: <b>{netmask}</b>",
-        "format-linked": "󰈀 {ifname} (No IP)",
-        "format-disconnected": " ",
-        "tooltip-format-disconnected": "Disconnected",
-        "on-click": "networkmanager_dmenu",
-        "interval": 2,
-    },
-
     "pulseaudio": {
 
-        "format": "{icon} {volume}%",
+        // "format": "{icon} {volume}%",
+        "format": "{icon}",
 
-        "format-muted": "",
-        "tooltip-format": "{icon} {desc} // {volume}%",
+        "format-muted": "<span color='#000'></span>",
+        "tooltip-format": "{desc} // {volume}%",
         "scroll-step": 5,
         "format-icons": {
-         "default": ["", "", "", "", ""],
-   //       "default": [
-   // "<span color='#69ff94'>▁</span>", // green
-   //        "<span style='font-size=32px' color='#2aa9ff'>▂</span>", // blue
-   //        "<span color='#f8f8f2'>▃</span>", // white
-   //        "<span color='#f8f8f2'>▄</span>", // white
-   //        "<span color='#ffffa5'>▅</span>", // yellow
-   //        "<span color='#ffffa5'>▆</span>", // yellow
-   //        "<span color='#ff9977'>▇</span>", // orange
-   //        "<span color='#dd532e'>█</span>"  // red
-   //       ],
+
+         // "default": 
+         // ["", "", "", "", ""],
+
+         "default": [
+          "<span color='#7081d0'></span>", // white
+          "<span color='#37f499'></span>", // white
+          "<span color='#04d1f9'></span>", // white
+          "<span color='#f1fc79'></span>", // yellow
+          "<span color='#ffffa5'></span>", // yellow
+          "<span color='#ff9977'></span>", // orange
+          "<span color='#f16c75'></span>"  // red
+         ]
 
         },
         "on-click-right":"pavucontrol",
@@ -250,6 +219,16 @@
     },
     "custom/wallpaper":{
         "format" : "",
-        "on-click" :"/home/brew//Desktop/rand_wallpapper.sh",
+        "on-click" :"/home/brew/.config/waybar/scripts/random_bg.sh",
+    },
+    "custom/os":{
+        "format" : "  ",
+        "on-click" :"rofi -show drun -show-icons",
+        "tooltip":false,
+        "tooltip-format": "drun",
+    },
+    "custom/spacer":{
+        "format" : " ",
+        "on-click" :"/home/brew/.config/waybar/scripts/random_bg.sh",
     },
 }

@@ -25,8 +25,8 @@
 }
 
 window#waybar {
-/* background: @dark; */
-background: transparent;
+background: @dark;
+/* background: transparent; */
  border: 2px solid @purple;
  border-radius: 8px;
  min-height : 30px;
@@ -79,17 +79,19 @@ padding : 4px;
 
 
 #tray{
-    color:#fff;
+    color:@green;
 }
 #tray > .passive{
-  color: #ffffff;
+  color: @green;
 }
 #tray menu {
-     background-color: @dark;
+    background-color: @dark;
     font-size: 12px;
-    color: @blue;
-    /* border: 2px solid @purple; */
-    /* border-radius : 8px; */
+    color: @green;
+    border: 2px solid @purple;
+    outline: 2px solid @pink;
+    border-radius : 8px;
+    /* background: #323449; */
 }
 
 #tray menu separator {
@@ -99,7 +101,7 @@ padding : 4px;
 
 
 #idle_inhibitor{
-color: #24966e;
+    color: #24966e;
     background : @bar-bg;
     opacity: 1;
     margin: 4px 0px 4px 0px;
@@ -126,7 +128,7 @@ color: #24966e;
 }
 #pulseaudio{
     /* color: @green; */
-    color: @green;
+    min-width :32px;
 }
 #cpu{
     color: @pink;
@@ -135,14 +137,6 @@ color: #24966e;
     color: @yellow;
 
 }
-#network{
-color: #A1BDCE;
-font-weight: normal;
-font-size: 12px;
-padding-right: 4px;
-padding-left: 4px
-}
-
 #custom-expand {
     min-width: 12px;
     color: #A1BDCE;
@@ -172,6 +166,19 @@ color: @yellow;
     min-width: 16px;
 /* padding-top: 2px; */
 }
+
+#custom-os{
+    color: @green;
+    min-width :28px;
+    font-size: 14px;
+/* background-image: url("/home/brew/Pictures/NixOS.png"); */
+/* background-size: auto 75% ; */
+/*   background-repeat: no-repeat;  */
+/*   background-position: center; */
+}
+
+
+
 #pulseaudio-slider {
     border-color : #37f499;
 }

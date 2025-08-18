@@ -3,7 +3,10 @@
 configuration {
  // modi: "window,drun,ssh,combi";
  modi: "drun,window,combi";
- combi-modi: "filebrowser,run,ssh";
+ combi-modi: "filebrowser,run,ssh,calc";
+    entry  {
+        max-history: 25;
+    }
  }
 * {
     font:   "FiraCode SemiBold 8";
