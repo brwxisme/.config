@@ -1,6 +1,10 @@
 /* ROUNDED THEME FOR ROFI*/
 /* Author: Newman Sanchez (https://github.com/newmanls) */
-
+configuration {
+ // modi: "window,drun,ssh,combi";
+ modi: "drun,window,combi";
+ combi-modi: "filebrowser,run,ssh";
+ }
 * {
     font:   "FiraCode SemiBold 8";
     darkx:   #212337;

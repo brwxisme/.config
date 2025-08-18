@@ -1,6 +1,7 @@
 @define-color blue #04d1f9;
 @define-color green #37f499;
 @define-color dark #212337;
+/* @define-color dark rgba(33, 35, 55,24) */
 @define-color notdark #323449;
 @define-color orange #f7c67f;
 @define-color pinkpurple #a48cf2;
@@ -24,7 +25,8 @@
 }
 
 window#waybar {
-background: @dark;
+/* background: @dark; */
+background: transparent;
  border: 2px solid @purple;
  border-radius: 8px;
  min-height : 30px;
