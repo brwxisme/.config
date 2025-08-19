@@ -45,7 +45,8 @@
             "pulseaudio",
             "memory",
             "cpu",
-            "custom/session",
+            "group/power",
+            // "custom/session",
             // "custom/notification",
             "custom/padd",
         ],
@@ -208,7 +209,7 @@
   },
   "custom/session":{
       "format" : "{}",
-    "on-click": "wlogout",
+    "on-click": "wlogout ",
   },
     "custom/eyedropper":{
         "format" : "",
@@ -231,4 +232,39 @@
         "format" : " ",
         "on-click" :"/home/brew/.config/waybar/scripts/random_bg.sh",
     },
+"group/power": {
+    "orientation": "inherit",
+    "drawer": {
+        "transition-duration": 500,
+        "children-class": "not-power",
+        "transition-left-to-right": false,
+    },
+    "modules": [
+        "custom/power", // First element is the "group leader" and won't ever be hidden
+        "custom/quit",
+        "custom/lock",
+        "custom/reboot",
+    ]
+},
+"custom/quit": {
+    "format": "󰗼",
+    "tooltip": false,
+    "on-click": "hyprctl dispatch exit"
+},
+"custom/lock": {
+    "format": "󰍁",
+    "tooltip": false,
+    "on-click": "hyprlock"
+},
+"custom/reboot": {
+    "format": "󰜉",
+    "tooltip": false,
+    "on-click": "reboot"
+},
+"custom/power": {
+    "format": "",
+    "tooltip": false,
+    "on-click": "wlogout"
+}
+
 }

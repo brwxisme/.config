@@ -6,7 +6,7 @@
 @define-color orange #f7c67f;
 @define-color pinkpurple #a48cf2;
 @define-color darkpurple #7081d0;
-@define-color purple #7081d0;
+@define-color purple #a48cf2;
 @define-color pink #f265b5;
 @define-color red #f16c75;
 @define-color yellow #f1fc79;
@@ -184,31 +184,7 @@ color: @yellow;
 /*   background-position: center; */
 }
 
-
-
-#pulseaudio-slider {
-    border-color : #37f499;
-}
-#pulseaudio-slider slider {
-    min-height: 4px;
-    min-width: 4px;
-    opacity: 0;
-    border: none;
-    box-shadow: none;
-
-}
-#pulseaudio-slider trough {
-    min-height: 8px;
-    min-width: 80px;
-    border-radius: 5px;
-    border: 2px solid #7081d0;
-
-}
-#pulseaudio-slider highlight {
-    /* min-height: 8px; */
-    /* border-radius: 5px; */
-    /* border: 2px solid pink; */
-    border: 2px solid #7081d0;
-    background: #37f499;
-    
+#custom-lock,#custom-quit,#custom-reboot,#group-power,#custom-power{
+    color: @red;
+    min-width : 22px;
 }
