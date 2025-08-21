@@ -180,7 +180,13 @@ color: @yellow;
 /*   background-position: center; */
 }
 
-#custom-lock,#custom-quit,#custom-reboot,#group-power,#custom-power{
+#custom-lock,#custom-quit,#custom-reboot,#group-power,#custom-power,#custom-sleep{
     color: @red;
     min-width : 22px;
+}
+#custom-lock{
+    color : @blue;
+}
+#custom-sleep{
+    color : @yellow;
 }

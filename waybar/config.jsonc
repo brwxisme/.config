@@ -254,9 +254,10 @@
     },
     "modules": [
         "custom/power", // First element is the "group leader" and won't ever be hidden
-        "custom/quit",
         "custom/lock",
-        "custom/reboot",
+        // "custom/quit",
+        // "custom/reboot",
+        "custom/sleep",
     ]
 },
 "custom/quit": {
@@ -268,6 +269,11 @@
     "format": "󰍁",
     "tooltip": false,
     "on-click": "hyprlock"
+},
+"custom/sleep":{
+    "format": "",
+    "tooltip": false,
+    "on-click": "systemctl suspend"
 },
 "custom/reboot": {
     "format": "󰜉",
