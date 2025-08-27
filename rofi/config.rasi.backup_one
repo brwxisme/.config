@@ -1,0 +1,7 @@
+
+//@theme "/home/brew/.local/share/rofi/themes/rounded-blue-dark.rasi"
+
+//@theme "/home/brew/.local/share/rofi/themes/rounded-eldritch.rasi"
+
+// @theme "/home/brew/.local/share/rofi/themes/rounded-eldritch.rasi"
+@theme "./rounded-eldritch.rasi"

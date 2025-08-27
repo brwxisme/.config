@@ -53,20 +53,63 @@ border: 0px solid #FFF;
 /* padding-right : 8px; */
 padding : 4px;
     font-size : 8px;
+    transition : background 0.5s ease;
+}
+#workspaces button label {
+    font-size : 6px;
+    /* background : @red; */
+    min-width : 14px;
+    padding-right : 3px;
+
+    border : 1px solid @purple;
+    border-radius : 24px;
+    /* transition-property: min-width; */
+    /* transition-duration: .25s; */
+    transition: min-width 0.25s cubic-bezier(0.33, 1, 0.68, 1);
+    /* transition : background 0.5s ease; */
+
 }
 #workspaces button {
     color : @purple;
-    padding: 0px 4px 0px 4px ;
+    padding: 1px 0px 1px 0px ;
+    margin: 0px 2px 0px 2px;
+    /* padding:auto; */
 }
 #workspaces button.persistent{
+    color: @blue;
+}
+#workspaces button.persistent label{
     color: @purple;
+    background: @purple;
+    /* border-color: @blue; */
 }
 #workspaces button.empty{
     color : @purple;
+
+
+
+}
+#workspaces button.empty label{
+        color : transparent;
+    background: @dark;
+    border-color: @purple;
+
 }
 #workspaces button.active{
     color: @green;
+}
+#workspaces button.active label{
+    background: @green;
+    border-color : @green;
+    
+    padding-right:3px;
+    min-width : 32px;
+    border-radius : 32px;
+    /* transition-property: min-width; */
+    /* transition-duration: .25s; */
+    transition: min-width 0.25s cubic-bezier(0.33, 1, 0.68, 1);
 
+    /* transition : width 0.5s ease-out; */
 }
 #workspaces button:hover {
     color : @green;
@@ -189,4 +232,9 @@ color: @yellow;
 }
 #custom-sleep{
     color : @yellow;
+}
+/* "hyprland/window", */
+#window{
+    color: @red;
+
 }

@@ -1,0 +1,103 @@
+/* ROUNDED THEME FOR ROFI*/
+/* Author: Newman Sanchez (https://github.com/newmanls) */
+configuration {
+ // modi: "window,drun,ssh,combi";
+ modi: "drun,window,calc,combi";
+ combi-modi: "filebrowser,run,ssh";
+    entry  {
+        max-history: 25;
+    }
+ }
+* {
+    font:   "FiraCode SemiBold 8";
+    darkx:   #212337;
+    darklight : #323449;
+    green: #37f499;
+    darkpurple: #7081d0;
+    purple: #a48cf2;
+    blue: #04d1f9;
+    base:  #a48cf2;
+    background-color:   transparent;
+}
+window {
+    location:       north;
+    y-offset:       calc(50% - 176px);
+    width:          480;
+    border-radius:  8px;
+
+    background-color:   @darkx;
+    border : 2px;
+
+}
+
+mainbox {
+    padding:    12px;
+    border: 2px;
+    border-color: @base;
+    border-radius: 6px;
+    background-color: transparent;
+}
+
+listview{
+    padding:        16px 0px;
+    background-color: transparent;
+    dynamic : true;
+    lines:      7;
+    columns:    1;
+
+    fixed-height: false;
+}
+element{
+    padding:        6px 8px;
+    border-color:    #ffff;
+    background-color: transparent;
+    // padding : 4px 8px;
+}
+element-text,element-icon{
+    padding:         2px 3px;
+    background-color: transparent;
+    text-color: @base;
+
+}
+element-text{
+    // padding-top: 10px;
+    padding: 4px 0px 0px 0px ;
+}
+element selected {
+    text-color: @green;
+
+    background-color: #000;
+
+}
+element selected normal, element selected active {
+    // text-color: @green;
+    background-color: @darklight;
+
+    border: 2px;
+    border-radius: 6px;
+    border-color:    @green;
+}
+element-text selected {
+    text-color: @green;
+}
+
+
+inputbar {
+    text-color : @green;
+    background-color:   @darklight;
+    // border-color:       @bg3;
+
+    border:         0px;
+    border-radius:  8px;
+
+    padding:    8px 16px;
+    spacing:    8px;
+    children:   [ prompt, entry ];
+}
+prompt,entry {
+    text-color : inherit;}
+
+// entry {
+//     placeholder:        "Search";
+//     placeholder-color:  @darkx;
+// }

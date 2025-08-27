@@ -1,7 +1,5 @@
 
-//@theme "/home/brew/.local/share/rofi/themes/rounded-blue-dark.rasi"
-
-//@theme "/home/brew/.local/share/rofi/themes/rounded-eldritch.rasi"
+//@theme "/nix/store/m4aynrhas7m7mpzg1lg1vfgzs9na0k2c-rofi-1.7.9+wayland1/share/rofi/themes/Adapta-Nokto.rasi"
 
 // @theme "/home/brew/.local/share/rofi/themes/rounded-eldritch.rasi"
-@theme "./rounded-eldritch.rasi"
+@theme "/home/brew/.config/rofi/ok-rounded-eldritch.rasi"

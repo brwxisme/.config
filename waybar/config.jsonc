@@ -94,9 +94,12 @@
 "hyprland/workspaces": {
 	"format": "{icon}",
 	"format-icons": {
-	"default": "",
-        "empty": "",
-	"active": "",
+	"default": "",
+        "empty": "",
+	"active": "",
+	// "default": "",
+	//        "empty": "",
+	// "active": "",
 	},
   "persistent-workspaces": {
              "DP-2": 5, // 5 workspaces by default on every monitor
@@ -284,6 +287,14 @@
     "format": "",
     "tooltip": false,
     "on-click": "wlogout"
-}
+},
+"hyprland/window": {
+    "format": "👉 {}",
+    "rewrite": {
+        "(.*) — Ablaze Floorp": "🌎 $1",
+        "(.*) - fish": "> [$1]"
+    },
+    "separate-outputs": true
+},
 
 }
