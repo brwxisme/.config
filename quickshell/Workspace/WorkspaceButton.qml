@@ -34,7 +34,7 @@ Rectangle {
             return 24;
         }
     }
-    height: 12
+    height: 10
     radius: 8
     border.width: 1
     border.color: {

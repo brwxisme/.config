@@ -2,6 +2,7 @@ pragma Singleton
 
 import Quickshell
 import QtQuick
+import Quickshell.Hyprland
 
 // your singletons should always have Singleton as the type
 Singleton {
@@ -25,4 +26,5 @@ Singleton {
     property string danger: pink
 
     property bool is_caps_on: false
+    property HyprlandWorkspace current_ws
 }

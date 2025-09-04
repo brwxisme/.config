@@ -26,3 +26,33 @@ vim.keymap.set('n', '<Esc>', function()
     vim.cmd.nohlsearch()
   end
 end, { noremap = true, desc = 'Close Oil buffer if active' })
+-- vim.keymap.set({ 'n', 'v' }, '<C-,>', function()
+--   require('mini').comment_line()
+-- end, { noremap = true, silent = true })
+-- Remap 'gc' to toggle comments in normal and visual mode
+-- vim.keymap.set({ 'n', 'v' }, ',,', '<Plug>(Comment.toggle.linewise)', { desc = 'Toggle comment' })
+-- vim.keymap.set('n', '<C>,', '<cmd>nohlsearch<CR>')
+-- vim.keymap.set('n', '<C-,>', '<Plug>(Comment.toggle.linewise)', { desc = 'Toggle comment' })
+--
+vim.keymap.set({ 'n' }, '<C-,>', 'gcc', { remap = true, desc = 'Toggle comment' })
+--
+-- vim.keymap.set('n', '<C-,>', function()
+--   vim.cmd.norm 'gcc'
+-- end)
+require('telescope').setup {
+  defaults = {
+    file_ignore_patterns = {
+      'node_modules',
+      '%.env',
+      '%.log',
+      '__pycache__',
+      '%.xlsx',
+      '%.jpg',
+      '%.png',
+      '%.webp',
+      '%.pdf',
+      '%.odt',
+      '%.ico',
+    },
+  },
+}

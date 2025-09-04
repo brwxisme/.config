@@ -5,14 +5,13 @@ import ".."
 
 Rectangle {
     id: root
-    anchors.fill: parent
+    // anchors.fill: parent
     property var scrn
     property int ws_total: 5
     property color my_base: MyColor.base
     property int starting_idx: {
         scrn.name == "DP-2" ? 1 : 6;
     }
-    implicitHeight: 28
     // color: MyColor.pink
     color: "transparent"
     signal workspaceAdded(workspace: HyprlandWorkspace)
