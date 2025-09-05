@@ -6,20 +6,22 @@ import ".."
 
 Rectangle {
     // width: 228
-    height: parent.height
+    // height: parent.height
     implicitHeight: 28
+    implicitWidth: row.implicitWidth
 
-    color: MyColor.blue
+    color: "transparent"
     anchors {
-        right: parent.right
+        //     right: parent.right
         verticalCenter: parent.verticalCenter
-        rightMargin: 12
+        //     rightMargin: 12
     }
 
     RowLayout {
+        id: row
         height: parent.height
         anchors.right: parent.right
-        // spacing: 8
+        spacing: 8
         Layout.alignment: Qt.AlignRight
         Layout.fillWidth: false
         // layoutDirection: Qt.RightToLeft

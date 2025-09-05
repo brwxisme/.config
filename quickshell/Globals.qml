@@ -12,6 +12,8 @@ Singleton {
     signal hideWorkspaces
     signal windowKilled
     signal showOnEmptyWorkspace
+    signal changeBackground
+
     property var monitor_workspace_window_count
     property var monitors: {
         "DP-2": false

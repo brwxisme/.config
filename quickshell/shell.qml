@@ -16,6 +16,7 @@ ShellRoot {
     OSD.Osds {
         id: osds
     }
+    // BlurTest {}
     // Corners {}
     // WSTest {}
     // PanelWindow {
@@ -33,8 +34,11 @@ ShellRoot {
     // OverlayWorkspace {}
     // OverlayWorkspaceNoCorner {}
     // WorkspaceBar {}
-    BarManager {}
-    // WorkspaceIndicator {}
+    BarManager {
+        id: bar_man
+        // WlrLayershell.namespace: "quickshell:bartest"
+    }
+    WorkspaceIndicator {}
     // BottomBar {}
 
     // Tray.SystemTrays {}

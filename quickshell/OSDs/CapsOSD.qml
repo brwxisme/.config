@@ -1,4 +1,5 @@
 import QtQuick
+import Quickshell.Wayland
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Services.Pipewire
@@ -41,6 +42,8 @@ Scope {
 
             anchors.bottom: true
             margins.bottom: screen.height / 5
+            WlrLayershell.layer: WlrLayer.Overlay
+
             exclusiveZone: 0
 
             implicitWidth: 150

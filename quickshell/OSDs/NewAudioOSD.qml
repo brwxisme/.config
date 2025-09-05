@@ -42,12 +42,12 @@ Scope {
             // Since the panel's screen is unset, it will be picked by the compositor
             // when the window is created. Most compositors pick the current active monitor.
 
-            anchors.bottom: true
-            margins.bottom: -4
-            exclusiveZone: 0
+            // anchors.bottom: true
+            // margins.bottom: 8
+            // exclusiveZone: 0
 
-            implicitWidth: 400
-            implicitHeight: 48
+            implicitWidth: 256
+            implicitHeight: 32
             color: "transparent"
             WlrLayershell.layer: WlrLayer.Overlay
 
@@ -56,25 +56,25 @@ Scope {
 
             Rectangle {
                 anchors.fill: parent
-                topLeftRadius: 8
-                topRightRadius: 8
-                // radius: height / 2
+                // topLeftRadius: 8
+                // topRightRadius: 8
+                radius: 24
                 color: MyColor.bg
-                border.width: 2
+                border.width: 1
                 border.color: MyColor.base
                 border.pixelAligned: true
 
                 RowLayout {
                     anchors {
                         fill: parent
-                        leftMargin: 15
-                        rightMargin: 15
+                        leftMargin: 32
+                        rightMargin: 32
                     }
 
                     Text {
                         text: ""
                         color: MyColor.primary
-                        font.pointSize: 18
+                        font.pointSize: 12
                         anchors {
                             verticalCenter: parent.verticalCenter
                         }
@@ -83,7 +83,7 @@ Scope {
                         // Stretches to fill all left-over space
                         Layout.fillWidth: true
 
-                        implicitHeight: 8
+                        implicitHeight: 4
                         radius: 20
                         color: MyColor.base
 
@@ -97,6 +97,12 @@ Scope {
 
                             implicitWidth: parent.width * (Pipewire.defaultAudioSink?.audio.volume ?? 0)
                             radius: parent.radius
+                            Behavior on implicitWidth {
+                                NumberAnimation {
+                                    duration: 125
+                                    easing.type: Easing.OutBack
+                                }
+                            }
                         }
                     }
                 }

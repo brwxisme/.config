@@ -29,7 +29,7 @@ Rectangle {
 
     width: {
         if (current || active) {
-            return 36;
+            return 48;
         } else {
             return 24;
         }

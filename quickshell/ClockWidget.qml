@@ -1,46 +1,36 @@
 import QtQuick
+import Quickshell.Io
 
-Rectangle {
-    id: clockWidget
-    property var screen: (typeof modelData !== 'undefined' ? modelData : null)
-    property var showTooltip: false
-    width: textItem.paintedWidth
-    height: textItem.paintedHeight
-    color: "transparent"
+Text {
+    id: root
 
-    Text {
-        id: textItem
-        text: "18:18"
-        font.family: Theme.fontFamily
-        font.weight: Font.Bold
-        font.pixelSize: Theme.fontSizeSmall
-        color: Theme.textPrimary
-        anchors.centerIn: parent
+    font.family: "Fira Code"
+    font.weight: 600
+    // width: 320
+    // height: 8
+    color: MyColor.primary
+    y: height / 2
+    // verticalCenter: parent.verticalCenter
+    // topMargin: 32
+    // horizontalCenter: parent.horizontalCenter
+    anchors {}
+    text: root.time
+    focus: true
+    Process {
+        id: dateProc
+        // command: ["date", "+%A %H:%M"]
+        command: ["date", "+%H:%M"]
+        running: true
+
+        stdout: StdioCollector {
+            onStreamFinished: root.text = this.text
+        }
     }
 
-    MouseArea {
-        id: clockMouseArea
-        anchors.fill: parent
-        hoverEnabled: true
-        onEntered: showTooltip = true
-        onExited: showTooltip = false
-        cursorShape: Qt.PointingHandCursor
-        // onClicked: function () {
-        //     calendar.visible = !calendar.visible;
-        // }
+    Timer {
+        interval: 1000
+        running: true
+        repeat: true
+        onTriggered: dateProc.running = true
     }
-
-    // Calendar {
-    //     id: calendar
-    //     screen: clockWidget.screen
-    //     visible: false
-    // }
-    //
-    // StyledTooltip {
-    //     id: dateTooltip
-    //     text: Time.dateString
-    //     tooltipVisible: showTooltip && !calendar.visible
-    //     targetItem: clockWidget
-    //     delay: 200
-    // }
 }

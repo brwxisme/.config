@@ -8,6 +8,7 @@ import Quickshell.Hyprland
 import QtQuick
 import "Workspace" as WS
 import "Tray" as Tray
+import "SystemStats" as Stat
 
 Scope {
     id: root
@@ -25,25 +26,34 @@ Scope {
 
                 WlrLayershell.layer: WlrLayer.Overlay
                 WlrLayershell.exclusionMode: ExclusionMode.Ignore
-                visible: false
+                // visible: false
                 screen: modelData
 
                 property HyprlandMonitor myMonitor: Hyprland.monitorFor(screen)
                 property HyprlandWorkspace myWorkspace: myMonitor.activeWorkspace
 
-                onMyWorkspaceChanged: {
-                    console.log("Monitor ", myMonitor.name, "CHANGED WS TO ", myWorkspace.id);
-                    // getWindowCount.running = true;
-                }
-
+                // onMyWorkspaceChanged: {
+                //     console.log("Monitor ", myMonitor.name, "CHANGED WS TO ", myWorkspace.id);
+                //     // getWindowCount.running = true;
+                // }
+                //
                 // property string my_bg: MyColor.purple
                 anchors {
                     top: true
-                    // left: true
-                    // right: true
+                    left: true
+                    right: true
                 }
 
                 color: "transparent"
+
+                implicitHeight: 2
+
+                MouseArea {
+                    anchors.fill: parent
+                    onDoubleClicked: {
+                        bar.show = true;
+                    }
+                }
 
                 Timer {
                     id: hideTimer
@@ -53,7 +63,6 @@ Scope {
                             return;
                         }
                         bar.show = !Globals.monitors[modelData.name];
-                        console.log(modelData.name, " visible = ", !Globals.monitors[modelData.name]);
                     }
                 }
 
@@ -90,9 +99,7 @@ Scope {
                         onStreamFinished: {
                             var x = JSON.parse(text);
                             root.windows = x.windows;
-                            console.log(bar_man.myMonitor.name, " windows : ", root.windows, " visible ? ", root.windows == 0);
                             bar.show = root.windows == 0;
-                            console.log(bar.show);
                         }
                     }
                 }
@@ -114,7 +121,7 @@ Scope {
                 }
                 onShowChanged: {
                     if (show) {
-                        margins.top = 4;
+                        margins.top = 8;
                     } else {
                         margins.top = -32;
                     }
@@ -137,6 +144,33 @@ Scope {
                     anchors.fill: parent
                     hoverEnabled: true
                     onExited: hideTimer.restart()
+                }
+
+                Rectangle {
+                    id: left_stat
+
+                    anchors.left: parent.left
+                    // anchors.leftMargin:32
+                    anchors.leftMargin: 16
+
+                    implicitWidth: row_left.implicitWidth + 32
+                    implicitHeight: 20
+                    // color: "transparent"
+                    color: MyColor.bg
+                    radius: 32
+                    border.color: MyColor.base
+                    border.width: 1
+                    Row {
+                        id: row_left
+                        // anchors.fill: parent
+                        // anchors.rightMargin: 32
+                        x: 16
+                        anchors.verticalCenter: parent.verticalCenter
+                        // anchors.centerIn: parent
+                        spacing: 16
+                        Stat.Stats {}
+                        ClockWidget {}
+                    }
                 }
 
                 OverlayWorkspaceNoCorner {
@@ -170,6 +204,7 @@ Scope {
                             icon_color: "white"
                             command: ["hyprpicker", "-a"]
                         }
+                        BackgroundButton {}
                         IconButton {
                             icon: ""
                             icon_color: MyColor.secondary
