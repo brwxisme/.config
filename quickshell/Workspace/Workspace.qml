@@ -16,7 +16,7 @@ Rectangle {
     color: "transparent"
     signal workspaceAdded(workspace: HyprlandWorkspace)
     anchors {
-        verticalCenter: parent.verticalCenter
+        // verticalCenter: parent.verticalCenter
         horizontalCenter: parent.horizontalCenter
     }
     Row {

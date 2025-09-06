@@ -22,8 +22,8 @@ Scope {
             property HyprlandWorkspace myWorkspace: myMonitor.activeWorkspace
             property bool monitor_focus: myMonitor.focused
 
-            property bool on_bot: false
-            property bool must_on_bot: false
+            property bool on_bot: true
+            property bool must_on_bot: true
             onOn_botChanged: {
                 pnl.visible = false;
                 temp_hide.restart();
@@ -43,12 +43,6 @@ Scope {
                     pnl.visible = true;
                 }
             }
-            onMonitor_focusChanged: {
-                // myMonitor.onFocusedChanged: {
-
-                recta.border.color = myMonitor.focused ? MyColor.primary : MyColor.base;
-                console.log("aaaaaaaaa");
-            }
 
             screen: modelData
             WlrLayershell.layer: WlrLayer.Top
@@ -56,35 +50,61 @@ Scope {
             anchors.bottom: on_bot ? true : false
             anchors.top: !on_bot ? true : false
             color: "transparent"
+            // color: "pink"
             aboveWindows: true
-            implicitWidth: recta.implicitWidth + 32
+            implicitWidth: recta.implicitWidth + 8
             implicitHeight: recta.implicitHeight
+
+            MouseArea {
+                anchors.fill: parent
+                hoverEnabled: true
+                acceptedButtons: Qt.LeftButton | Qt.RightButton
+                onDoubleClicked: {
+                    pnl.must_on_bot = !pnl.must_on_bot;
+                    on_bot = !on_bot;
+                }
+                onClicked: {
+                    if (mouse.button === Qt.RightButton) {
+                        console.log("Right button clicked!");
+                        on_bot = !on_bot;
+                        // Perform actions specific to right-click
+                    }
+                }
+                // onEntered: {
+                //     console.log("etnein");
+                //     // on_bot = !on_bot;
+                // }
+            }
             Rectangle {
                 id: recta
                 color: root.my_bg
-                implicitWidth: 256
-                implicitHeight: 22
+                implicitWidth: 256 - 32
+                implicitHeight: 26
 
                 topLeftRadius: pnl.on_bot ? 64 : 0
                 topRightRadius: pnl.on_bot ? 64 : 0
                 bottomLeftRadius: !pnl.on_bot ? 64 : 0
                 bottomRightRadius: !pnl.on_bot ? 64 : 0
 
-                border.color: MyColor.primary
-                border.width: 1
+                // border.color: MyColor.primary
+                border.color: Globals.window_count[modelData.name] == 0 ? "transparen" : MyColor.pink
+                border.width: 2
+                // y: getY()
                 y: pnl.on_bot ? 4 : -4
+
                 anchors.horizontalCenter: parent.horizontalCenter
 
                 Workspace {
+                    id: ws
                     scrn: pnl.modelData
+                    // anchors.top: parent.top
+                    y: 12
                 }
-            }
-            MouseArea {
-                anchors.fill: parent
-                hoverEnabled: true
-                onEntered: {
-                    console.log("etnein");
-                    on_bot = !on_bot;
+                Behavior on border.color {
+                    ColorAnimation {
+                        duration: 250
+                        easing.type: Easing.Linear
+                    }
                 }
             }
             Behavior on anchors.top {
@@ -101,14 +121,24 @@ Scope {
                 target: Globals
 
                 function onShowWorkspaces(): void {
-                    pnl.must_on_bot = Globals.window_count[modelData.name] != 0;
-                    pnl.on_bot = pnl.must_on_bot;
-                // pnl.visible = Globals.window_count[modelData.name] != 0;
+                    updatePos();
                 }
                 function onShowOnEmptyWorkspace(): void {
-                    pnl.must_on_bot = Globals.window_count[modelData.name] != 0;
-                    pnl.on_bot = pnl.must_on_bot;
-                // pnl.visible = Globals.window_count[modelData.name] != 0;
+                    // pnl.visible = Globals.window_count[modelData.name] != 0;
+                    updatePos();
+                }
+            }
+            function updatePos(): void {
+                // pnl.must_on_bot = true;
+                recta.border.color = Globals.window_count[modelData.name] != 0 ? MyColor.primary : "transparent";
+                pnl.on_bot = pnl.must_on_bot;
+            // recta.y = getY();
+            }
+            function getY(): void {
+                if (Globals.window_count[modelData.name] == 0) {
+                    return 0;
+                } else {
+                    return pnl.on_bot ? 10 : -10;
                 }
             }
         }

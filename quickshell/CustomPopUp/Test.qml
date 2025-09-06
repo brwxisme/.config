@@ -20,6 +20,7 @@ Scope {
         //     right: true
         // }
         color: "transparent"
+        visible: false
 
         PopupWindow {
             // anchor.window: toplevel

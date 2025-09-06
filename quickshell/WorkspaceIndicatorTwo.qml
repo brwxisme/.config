@@ -1,12 +1,10 @@
 pragma ComponentBehavior: Bound
 import QtQuick
-import Qt5Compat.GraphicalEffects
 import Quickshell
 import Quickshell.Wayland
 import Quickshell.Hyprland
 import Quickshell
 import QtQuick
-import QtQuick.Effects
 import "Workspace"
 
 Scope {
@@ -25,8 +23,8 @@ Scope {
             property bool on_bot: false
             property bool must_on_bot: false
             onOn_botChanged: {
-                pnl.visible = false;
-                temp_hide.restart();
+                // pnl.visible = false;
+                // temp_hide.restart();
                 if (on_bot != must_on_bot) {
                     back_on_top.restart();
                 }
@@ -46,22 +44,30 @@ Scope {
             onMonitor_focusChanged: {
                 // myMonitor.onFocusedChanged: {
 
-                recta.border.color = myMonitor.focused ? MyColor.primary : MyColor.base;
+                // recta.border.color = myMonitor.focused ? MyColor.primary : MyColor.base;
                 console.log("aaaaaaaaa");
             }
 
             screen: modelData
             WlrLayershell.layer: WlrLayer.Top
             WlrLayershell.exclusionMode: ExclusionMode.Ignore
+
             anchors.bottom: on_bot ? true : false
             anchors.top: !on_bot ? true : false
+
+            // anchors.bottom: true
+
             color: "transparent"
+            // color: "pink"
+
             aboveWindows: true
             implicitWidth: recta.implicitWidth + 32
-            implicitHeight: recta.implicitHeight
+            // implicitHeight: recta.implicitHeight + 8
+            implicitHeight: 32
             Rectangle {
                 id: recta
                 color: root.my_bg
+                // color: "transparent"
                 implicitWidth: 256
                 implicitHeight: 22
 
@@ -69,11 +75,15 @@ Scope {
                 topRightRadius: pnl.on_bot ? 64 : 0
                 bottomLeftRadius: !pnl.on_bot ? 64 : 0
                 bottomRightRadius: !pnl.on_bot ? 64 : 0
+                // radius: 64
 
-                border.color: MyColor.primary
+                border.color: pnl.must_on_bot ? MyColor.primary : "transparent"
+                // border.color: MyColor.pink
+                // border.color: "transparent"
                 border.width: 1
-                y: pnl.on_bot ? 4 : -4
+                y: on_bot ? 12 : -2
                 anchors.horizontalCenter: parent.horizontalCenter
+                // anchors.verticalCenter: parent.verticalCenter
 
                 Workspace {
                     scrn: pnl.modelData
@@ -82,10 +92,17 @@ Scope {
             MouseArea {
                 anchors.fill: parent
                 hoverEnabled: true
-                onEntered: {
-                    console.log("etnein");
-                    on_bot = !on_bot;
+                onDoubleClicked: {
+                    if (pnl.must_on_bot) {
+                        on_bot = !on_bot;
+                    }
                 }
+                // onEntered: {
+                //     console.log("etnein");
+                //     if (pnl.must_on_bot) {
+                //         on_bot = !on_bot;
+                //     }
+                // }
             }
             Behavior on anchors.top {
                 PropertyAnimation {

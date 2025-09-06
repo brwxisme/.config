@@ -9,7 +9,7 @@ Rectangle {
     Text {
         id: icon
         text: ""
-        color: MyColor.red
+        color: MyColor.yellow
         anchors.centerIn: parent
     }
     MouseArea {

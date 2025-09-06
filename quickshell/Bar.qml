@@ -1,89 +1,208 @@
-import QtQuick
-import QtQuick.Layouts
-import Quickshell
+pragma ComponentBehavior: Bound
 import Quickshell.Io
+import QtQuick
+import Quickshell
 import Quickshell.Wayland
-import Qt5Compat.GraphicalEffects
 import Quickshell
-import Quickshell.Io
-import QtQuick
 import Quickshell.Hyprland
-import "Workspace" as WS
-import "SystemStats" as SS
+import QtQuick
+import "Workspace"
+import "Tray" as Tray
+import "SystemStats" as Stat
 
 Scope {
     id: root
-    property string time
-    property string is_caps_on
+    property string kek
+    property string my_bg: MyColor.darkest
+    property int windows: 0
     Variants {
         model: Quickshell.screens
-        PanelWindow {
+        // model: Hyprlan.monitors
+        Item {
             required property var modelData
-            screen: modelData
-            anchors {
-                top: true
-                left: true
-                right: true
-            }
 
-            implicitHeight: 30
-            color: MyColor.bg
-            Rectangle {
-                implicitWidth: 160
-                x: 12
+            PanelWindow {
+                id: bar_man
+
+                WlrLayershell.layer: WlrLayer.Overlay
+                WlrLayershell.exclusionMode: ExclusionMode.Ignore
+                // visible: false
+                screen: modelData
+
+                property HyprlandMonitor myMonitor: Hyprland.monitorFor(screen)
+                property HyprlandWorkspace myWorkspace: myMonitor.activeWorkspace
+
                 anchors {
-                    verticalCenter: parent.verticalCenter
+                    top: true
+                    left: true
+                    right: true
                 }
-                WS.Workspaces {
 
-                    anchors {
-                        verticalCenter: parent.verticalCenter
-                    }
-                    scrn: modelData
-                    implicitWidth: 256
-                }
-            }
-
-            Rectangle {
-                anchors.fill: parent
-                radius: height / 3
                 color: "transparent"
-                border.color: MyColor.base
-                border.width: 2
-                anchors {
-                    fill: parent
-                    margins: 4
-                }
-                Text {
-                    font.family: "Fira Code"
-                    font.weight: 600
-                    color: MyColor.primary
-                    anchors {
-                        verticalCenter: parent.verticalCenter
-                        horizontalCenter: parent.horizontalCenter
+
+                implicitHeight: 2
+
+                MouseArea {
+                    anchors.fill: parent
+                    onDoubleClicked: {
+                        bar.show = true;
                     }
-                    text: root.time
-                    focus: true
+                }
+
+                Timer {
+                    id: hideTimer
+                    interval: 1000
+                    onTriggered: {
+                        if (bar_mouse.containsMouse) {
+                            return;
+                        }
+                        bar.show = !Globals.monitors[modelData.name];
+                    }
+                }
+
+                Connections {
+                    target: Globals
+
+                    function onShowWorkspaces(): void {
+                        bar.show = Globals.window_count[modelData.name] == 0;
+                    }
+                    function onShowOnEmptyWorkspace(): void {
+                        bar.show = Globals.window_count[modelData.name] == 0;
+                    }
+                }
+                function open_ws_panel(): void {
+                    bar.show = true;
+                    if (Globals.monitors[modelData.name]) {
+                        hideTimer.restart();
+                    }
                 }
             }
+            PanelWindow {
+                id: bar
+                WlrLayershell.layer: WlrLayer.Overlay
+                WlrLayershell.exclusionMode: ExclusionMode.Ignore
+                visible: true
+                property bool show: true
+                color: "transparent"
+                height: 32
+                screen: modelData
+                // margins.top: -8
+                anchors {
+                    top: true
+                    bottom: true
+                    left: true
+                    right: true
+                }
+                onShowChanged: {
+                    if (show) {
+                        margins.top = 8;
+                    } else {
+                        margins.top = -32;
+                    }
+                }
 
-            SS.Stats {}
+                mask: Region {
+                    Region {
+                        item: left_stat
+                    }
+                    Region {
+                        item: recta
+                    }
+                }
+
+                MouseArea {
+                    id: bar_mouse
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    onExited: hideTimer.restart()
+                }
+
+                Rectangle {
+                    id: left_stat
+
+                    anchors.left: parent.left
+                    // anchors.leftMargin:32
+                    anchors.leftMargin: 16
+
+                    implicitWidth: row_left.implicitWidth + 32
+                    implicitHeight: 20
+                    // color: "transparent"
+                    color: MyColor.bg
+                    radius: 32
+                    border.color: MyColor.base
+                    border.width: 1
+                    Row {
+                        id: row_left
+                        // anchors.fill: parent
+                        // anchors.rightMargin: 32
+                        x: 16
+                        anchors.verticalCenter: parent.verticalCenter
+                        // anchors.centerIn: parent
+                        spacing: 16
+                        Stat.Stats {}
+                        // ClockWidget {}
+                    }
+                }
+
+                // Workspace {
+                //     id: o_ws
+                //     scrn: modelData
+                //     // visible: Globals.window_count[modelData.name] == 0
+                // }
+                //
+                Rectangle {
+                    id: recta
+
+                    anchors.right: parent.right
+                    anchors.rightMargin: 16
+
+                    implicitWidth: row.implicitWidth + 8
+                    implicitHeight: 20
+                    // color: "transparent"
+                    color: MyColor.bg
+                    radius: 32
+                    border.color: MyColor.base
+                    border.width: 1
+                    Row {
+                        id: row
+                        anchors.fill: parent
+                        anchors.centerIn: parent
+                        spacing: 0
+                        Tray.TrayList {}
+                        Item {
+                            implicitWidth: 8
+                            implicitHeight: 8
+                        }
+                        IconButton {
+                            icon: ""
+                            icon_color: "white"
+                            command: ["hyprpicker", "-a"]
+                        }
+                        BackgroundButton {}
+                        IconButton {
+                            icon: ""
+                            icon_color: MyColor.secondary
+                            command: ["pavucontrol"]
+                        }
+                        PowerButton {
+                            // color: "pink"
+                            // implicitWidth: 32
+                            implicitHeight: 16
+                        }
+                    }
+                }
+
+                Behavior on margins.top {
+                    NumberAnimation {
+                        duration: 125
+                        easing.type: Easing.OutBack
+                    }
+                }
+            }
+            Component.onCompleted: {
+                Globals.showOnEmptyWorkspace();
+                // bar_man.open_ws_panel();
+            }
         }
-    }
-    Process {
-        id: dateProc
-        command: ["date", "+%A %H:%M"]
-        running: true
-
-        stdout: StdioCollector {
-            onStreamFinished: root.time = this.text
-        }
-    }
-
-    Timer {
-        interval: 1000
-        running: true
-        repeat: true
-        onTriggered: dateProc.running = true
     }
 }

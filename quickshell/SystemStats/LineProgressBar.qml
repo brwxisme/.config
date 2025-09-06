@@ -15,13 +15,16 @@ Rectangle {
     property string border_color: MyColor.base
     property string tooltip_text
 
-    implicitHeight: 12
+    implicitHeight: 10
+    // implicitWidth: 64
     implicitWidth: 64
     color: "transparent"
+    // color: "pink"
 
     // Pop.Base {
     Pop.Test {
         id: customTooltip
+        visible: false
         text: {
             if (root.tooltip_text == "") {
                 return root.value + " / " + root.max_value;
@@ -52,7 +55,7 @@ Rectangle {
                 verticalCenter: parent.verticalCenter
             }
             Rectangle {
-                implicitHeight: 4
+                implicitHeight: parent.implicitHeight
                 color: clr
                 // implicitWidth: parent.width / 2
                 implicitWidth: parent.width * (root.value / root.max_value)
@@ -67,6 +70,10 @@ Rectangle {
         hoverEnabled: true
 
         // When hovering, configure and open the custom popup
+        onClicked: {
+            customTooltip.visible = true;
+            customTooltip.base = root;
+        }
         onEntered: {
             // customTooltip.sourceItem = parent;
             // customTooltip.text = "Custom tooltip outside clipped parent.";
