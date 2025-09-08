@@ -4,8 +4,8 @@ import Quickshell.Io
 Rectangle {
     id: root
     property list<string> command
-    property string icon: "x"
-    property string icon_color
+    property string icon: ""
+    property string icon_color: "white"
     color: "transparent"
     implicitWidth: icon.implicitWidth + 8
     implicitHeight: 16
@@ -26,11 +26,12 @@ Rectangle {
     }
     Process {
         id: wlSession
-        command: root.command
+        command: ["hyprpicker", "-a"]
         running: false
         stdout: StdioCollector {
             onStreamFinished: {
                 console.log(this.text);
+                icon.color = this.text.replace(/(\r\n|\n|\r)/gm, "");
             }
         }
     }

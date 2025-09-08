@@ -40,36 +40,42 @@ Scope {
             // Since the panel's screen is unset, it will be picked by the compositor
             // when the window is created. Most compositors pick the current active monitor.
 
-            anchors.bottom: true
-            margins.bottom: screen.height / 5
+            // anchors.bottom: true
+            // margins.bottom: screen.height / 5
             WlrLayershell.layer: WlrLayer.Overlay
 
             exclusiveZone: 0
 
-            implicitWidth: 150
-            implicitHeight: 150
+            // implicitWidth: 150
+            implicitWidth: rect.implicitWidth
+            implicitHeight: 32
             color: "transparent"
 
             // An empty click mask prevents the window from blocking mouse events.
             mask: Region {}
 
             Rectangle {
+                id: rect
                 anchors.fill: parent
-                radius: height / 8
+                radius: 24
                 color: MyColor.bg
                 border.width: 2
                 border.color: is_caps_on ? MyColor.pink : MyColor.base
                 border.pixelAligned: true
+                // implicitWidth: cap_text.implicitWidth + 32
+                implicitWidth: 256
 
                 Text {
-                    text: ""
+                    id: cap_text
+                    // text: ""
+                    text: "    Caps Lock Is " + (is_caps_on ? "ON" : "OFF")
                     color: is_caps_on ? MyColor.pink : MyColor.base
-                    font.pointSize: 64
+                    font.pointSize: 12
                     y: 8
                     anchors {
                         bottomMargin: 0
                         horizontalCenter: parent.horizontalCenter
-                        // verticalCenter: parent.verticalCenter
+                        verticalCenter: parent.verticalCenter
                     }
                 }
             }

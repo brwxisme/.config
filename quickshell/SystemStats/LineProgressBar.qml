@@ -48,15 +48,19 @@ Rectangle {
         }
         Rectangle {
             color: MyColor.purple
+
             implicitHeight: 4
             // implicitWidth: 28
             Layout.fillWidth: true
+            radius: 2
             anchors {
                 verticalCenter: parent.verticalCenter
             }
             Rectangle {
+                radius: 2
                 implicitHeight: parent.implicitHeight
                 color: clr
+
                 // implicitWidth: parent.width / 2
                 implicitWidth: parent.width * (root.value / root.max_value)
                 anchors {

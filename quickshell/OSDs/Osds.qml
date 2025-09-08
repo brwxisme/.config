@@ -10,10 +10,9 @@ Scope {
     id: osd
     property string is_caps_on
 
-    CapsOSD {
+    TextCapsOSD {
         id: caposd
     }
-    // AudioOSD {}
     NewAudioOSD {}
     Process {
         id: checkCaps
@@ -24,7 +23,6 @@ Scope {
         stdout: StdioCollector {
             onStreamFinished: {
                 caposd.is_caps_on = this.text.includes("1");
-                // console.log(`line read: ${this.text}`);
             }
         }
     }

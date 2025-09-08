@@ -44,15 +44,6 @@ Scope {
                     }
                 }
 
-                // mask: Region {
-                //     //     Region {
-                //     //         item: left_stat
-                //     //     }
-                //     Region {
-                //         item: recta
-                //     }
-                // }
-                //
                 Rectangle {
                     id: recta
 
@@ -88,29 +79,6 @@ Scope {
                             implicitWidth: 8
                             implicitHeight: 8
                         }
-                        // Tray.TrayList {
-                        //     anchors.verticalCenter: parent.verticalCenter
-                        // }
-                        // Item {
-                        //     implicitWidth: 8
-                        //     implicitHeight: 8
-                        // }
-                        // IconButton {
-                        //     icon: ""
-                        //     icon_color: "white"
-                        //     command: ["hyprpicker", "-a"]
-                        // }
-                        // BackgroundButton {}
-                        // IconButton {
-                        //     icon: ""
-                        //     icon_color: MyColor.secondary
-                        //     command: ["pavucontrol"]
-                        // }
-                        // PowerButton {
-                        //     // color: "pink"
-                        //     // implicitWidth: 32
-                        //     implicitHeight: 16
-                        // }
                     }
                 }
             }
@@ -118,11 +86,23 @@ Scope {
                 target: Globals
 
                 function onShowWorkspaces(): void {
-                    bar.show = Globals.window_count[modelData.name] == 0;
+                    updateOnWindowCount();
                 }
                 function onShowOnEmptyWorkspace(): void {
-                    bar.show = Globals.window_count[modelData.name] == 0;
-                    console.log("rrrrrrrrrr");
+                    updateOnWindowCount();
+                }
+                function onShowBar(val: string): void {
+                    if (modelData.name == val) {
+                        bar.show = !bar.show;
+
+                        recta.border.color = Globals.window_count[modelData.name] != 0 ? MyColor.primary : "transparent";
+                    }
+                }
+            }
+            function updateOnWindowCount(): void {
+                bar.show = Globals.window_count[modelData.name] == 0;
+                if (bar.show) {
+                    recta.border.color = Globals.window_count[modelData.name] != 0 ? MyColor.primary : "transparent";
                 }
             }
         }

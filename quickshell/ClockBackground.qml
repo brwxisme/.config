@@ -33,23 +33,26 @@ Scope {
                 }
                 Rectangle {
                     id: container
-                    implicitWidth: date.implicitWidth + 16
-                    implicitHeight: 96
-                    color: MyColor.darkest
+                    implicitWidth: date.implicitWidth + 32
+                    implicitHeight: 112
+                    // color: MyColor.darkest
+                    color: "transparent"
                     radius: 32
                     opacity: 1
 
                     anchors {
                         top: parent.top
                         horizontalCenter: parent.horizontalCenter
-                        margins: 96
+                        topMargin: Math.floor(modelData.height * 0.15)
+                        // topMargin: 160
+                        // margins: 96
                     }
                     Text {
                         id: time
 
                         font.family: "Fira Code"
                         font.weight: 600
-                        font.pointSize: 32
+                        font.pointSize: 36
                         // width: 320
                         // height: 8
                         color: MyColor.primary
@@ -72,7 +75,7 @@ Scope {
                         // visible: false
                         font.family: "Fira Code"
                         font.weight: 600
-                        font.pointSize: 16
+                        font.pointSize: 18
                         // width: 320
                         // height: 8
                         color: MyColor.primary
@@ -89,6 +92,12 @@ Scope {
                         text: "xx"
                         focus: true
                     }
+                    Behavior on opacity {
+                        OpacityAnimator {
+                            duration: 500
+                            easing.type: Easing.Linear
+                        }
+                    }
                 }
                 Process {
                     id: dateProc
@@ -101,12 +110,6 @@ Scope {
                     }
                 }
 
-                Timer {
-                    interval: 1000
-                    running: true
-                    repeat: true
-                    onTriggered: dateProc.running = true
-                }
                 Process {
                     id: dateProcx
                     // command: ["date", "+%A %H:%M"]
@@ -117,12 +120,14 @@ Scope {
                         onStreamFinished: date.text = this.text.replace(/(\r\n|\n|\r)/gm, "")
                     }
                 }
-
                 Timer {
                     interval: 1000
                     running: true
                     repeat: true
-                    onTriggered: dateProcx.running = true
+                    onTriggered: {
+                        dateProc.running = true;
+                        dateProcx.running = true;
+                    }
                 }
             }
             Connections {

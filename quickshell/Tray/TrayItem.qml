@@ -31,19 +31,7 @@ Item {
             }
             return icon;
         }
-        // source: {
-        //     let icon = modelData.icon;
-        //     if (icon.includes("?path=")) {
-        //         const [name, path] = icon.split("?path=");
-        //         icon = `file://${path}/${name.slice(name.lastIndexOf("/") + 1)}`;
-        //     }
-        //     return icon;
-        // }
     }
-    // Text {
-    //     id: name
-    //     text: root.modelData.id
-    // }
 
     MouseArea {
         anchors.fill: parent
@@ -57,7 +45,8 @@ Item {
                 if (modelData.hasMenu) {
                     const window = QsWindow.window;
                     // [TODO] The bellow is kinda hard coded, find a better solution
-                    const widgetRect = window.contentItem.mapFromItem(root, 10, root.height - 10, root.width, root.height);
+                    //
+                    const widgetRect = window.contentItem.mapFromItem(root, 10, root.height - 20, root.width, root.height);
                     menuAnchor.anchor.rect = widgetRect;
                     menuAnchor.open();
                 }
@@ -67,11 +56,10 @@ Item {
     }
     QsMenuAnchor {
         id: menuAnchor
+
         menu: modelData.menu
+
         anchor.window: root.QsWindow.window ?? null
         anchor.adjustment: PopupAdjustment.Flip
-    }
-    Component.onCompleted: {
-        console.log(root.modelData.icon);
     }
 }

@@ -14,6 +14,7 @@ Singleton {
     signal windowKilled
     signal showOnEmptyWorkspace
     signal changeBackground
+    signal showBar(val: string)
 
     property var monitor_workspace_window_count
     property var monitors: {
