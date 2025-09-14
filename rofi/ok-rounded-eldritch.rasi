@@ -2,7 +2,7 @@
 /* Author: Newman Sanchez (https://github.com/newmanls) */
 configuration {
  // modi: "window,drun,ssh,combi";
- modi: "drun,window,calc,combi";
+ modi: "drun,calc,window,combi";
  combi-modi: "filebrowser,run,ssh";
     entry  {
         max-history: 25;
@@ -25,17 +25,19 @@ window {
     width:          480;
     border-radius:  8px;
 
-    background-color:   @darkx;
+    // background-color:   @darkx;
+    background-color:   transparent;
     border : 2px;
+    // border-color : @blue;
 
 }
 
 mainbox {
     padding:    12px;
     border: 2px;
-    border-color: @base;
+    border-color: @green;
     border-radius: 6px;
-    background-color: transparent;
+    background-color: @darkx;
 }
 
 listview{
@@ -101,3 +103,16 @@ prompt,entry {
 //     placeholder:        "Search";
 //     placeholder-color:  @darkx;
 // }
+
+
+message{
+    padding:        6px 8px;
+    }
+textbox{
+    text-color : @green;
+    padding:        12px 8px 0px 8px;
+    margin-top : 12px;
+    // border: 2px;
+    // border-radius: 6px;
+    // border-color:    @green;
+}
