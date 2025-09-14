@@ -82,7 +82,6 @@ Rectangle {
             // customTooltip.sourceItem = parent;
             // customTooltip.text = "Custom tooltip outside clipped parent.";
             // // customTooltip.open();
-            // console.log(customTooltip.text);
             customTooltip.visible = true;
             customTooltip.base = root;
             // console.log("eee");

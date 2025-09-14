@@ -66,7 +66,7 @@ Scope {
                             topMargin: 8
                             // bottomMargin: 64
                         }
-                        text: root.time
+                        text: Globals.time
                         focus: true
                     }
                     Text {
@@ -89,7 +89,7 @@ Scope {
                             horizontalCenter: parent.horizontalCenter
                             // topMargin: time.implicitHeight / 2
                         }
-                        text: "xx"
+                        text: Globals.date
                         focus: true
                     }
                     Behavior on opacity {
@@ -97,36 +97,6 @@ Scope {
                             duration: 500
                             easing.type: Easing.Linear
                         }
-                    }
-                }
-                Process {
-                    id: dateProc
-                    // command: ["date", "+%A %H:%M"]
-                    command: ["date", "+%H:%M"]
-                    running: true
-
-                    stdout: StdioCollector {
-                        onStreamFinished: time.text = this.text.replace(/(\r\n|\n|\r)/gm, "")
-                    }
-                }
-
-                Process {
-                    id: dateProcx
-                    // command: ["date", "+%A %H:%M"]
-                    command: ["date", "+%A, %d %B"]
-                    running: true
-
-                    stdout: StdioCollector {
-                        onStreamFinished: date.text = this.text.replace(/(\r\n|\n|\r)/gm, "")
-                    }
-                }
-                Timer {
-                    interval: 1000
-                    running: true
-                    repeat: true
-                    onTriggered: {
-                        dateProc.running = true;
-                        dateProcx.running = true;
                     }
                 }
             }

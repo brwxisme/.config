@@ -9,6 +9,7 @@ import QtQuick
 import "Workspace"
 import "Tray" as Tray
 import "SystemStats" as Stat
+import "Components"
 
 Scope {
     id: root
@@ -28,21 +29,45 @@ Scope {
                 visible: true
                 property bool show: true
                 color: "transparent"
-                height: recta.implicitHeight + 4
+                implicitHeight: recta.implicitHeight + 4
                 implicitWidth: recta.implicitWidth + 32
                 screen: modelData
-                // margins.top: -8
+                margins.left: 16
                 anchors {
                     bottom: true
                     left: true
                 }
                 onShowChanged: {
                     if (show) {
-                        margins.left = 8;
+                        margins.bottom = 0;
                     } else {
-                        margins.left = (recta.implicitWidth + 28) * -1;
+                        margins.bottom = -32;
                     }
                 }
+
+                // CurlyBoxHorizontal {
+                //     id: recta
+                //     anchors.bottom: parent.bottom
+                //     totalWidth: 256 + 16
+                //     totalHeight: 24
+                //     Row {
+                //         id: row
+                //         // anchors.fill: parent
+                //         anchors.centerIn: parent
+                //         // anchors.bottomMargin: 8
+                //         spacing: 0
+                //         // anchors.horizontalCenter: parent.horizontalCenter
+                //         Item {
+                //             implicitWidth: 12
+                //             implicitHeight: 8
+                //         }
+                //         Stat.Stats {}
+                //         Item {
+                //             implicitWidth: 8
+                //             implicitHeight: 8
+                //         }
+                //     }
+                // }
 
                 Rectangle {
                     id: recta
@@ -95,14 +120,16 @@ Scope {
                     if (modelData.name == val) {
                         bar.show = !bar.show;
 
-                        recta.border.color = Globals.window_count[modelData.name] != 0 ? MyColor.primary : "transparent";
+                        // recta.border.color = Globals.window_count[modelData.name] != 0 ? MyColor.primary : "transparent";
+                        recta.borderColor = Globals.window_count[modelData.name] != 0 ? MyColor.primary : "transparent";
                     }
                 }
             }
             function updateOnWindowCount(): void {
                 bar.show = Globals.window_count[modelData.name] == 0;
                 if (bar.show) {
-                    recta.border.color = Globals.window_count[modelData.name] != 0 ? MyColor.primary : "transparent";
+                    // recta.border.color = Globals.window_count[modelData.name] != 0 ? MyColor.primary : "transparent";
+                    recta.borderColor = Globals.window_count[modelData.name] != 0 ? MyColor.primary : "transparent";
                 }
             }
         }

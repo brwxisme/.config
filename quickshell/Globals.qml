@@ -25,6 +25,9 @@ Singleton {
         "DP-2": 0,
         "HDMI-A-1": 0
     }
+
+    property string time
+    property string date
     //
     // property var window_count: ({})
     Item {
@@ -89,6 +92,36 @@ Singleton {
                 console.log("HDMI ", root.window_count["HDMI-A-1"]);
                 Globals.showOnEmptyWorkspace();
             }
+        }
+    }
+    Process {
+        id: timeProc
+        // command: ["date", "+%A %H:%M"]
+        command: ["date", "+%H:%M"]
+        running: true
+
+        stdout: StdioCollector {
+            onStreamFinished: time = this.text.replace(/(\r\n|\n|\r)/gm, "")
+        }
+    }
+
+    Process {
+        id: dateProc
+        // command: ["date", "+%A %H:%M"]
+        command: ["date", "+%A, %d %B"]
+        running: true
+
+        stdout: StdioCollector {
+            onStreamFinished: date = this.text.replace(/(\r\n|\n|\r)/gm, "")
+        }
+    }
+    Timer {
+        interval: 1000
+        running: true
+        repeat: true
+        onTriggered: {
+            dateProc.running = true;
+            timeProc.running = true;
         }
     }
 }

@@ -7,15 +7,15 @@ import "VerticalWorkspace"
 import "Components"
 
 ShellRoot {
-    // Background {}
-    // ClockBackground {}
-    // OSD.Osds {
-    //     id: osds
-    // }
-    // // WorkspaceIndicatorWIP {}
-    // RightBar {}
-    // LeftBar {}
-    // BarToggle {}
+    Background {}
+    ClockBackground {}
+    OSD.Osds {
+        id: osds
+    }
+    WorkspaceIndicatorWIP {}
+    RightBar {}
+    LeftBar {}
+    BarToggle {}
     // CurlyWorkspaceIndicator {}
     // VerticalWorkspace {}
     // PanelWindow {
@@ -27,6 +27,4 @@ ShellRoot {
     //         totalHeight: 24
     //     }
     // }
-    // ModeOne {}
-    ModeTwo {}
 }
