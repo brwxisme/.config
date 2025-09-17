@@ -7,7 +7,8 @@ import Quickshell.Hyprland
 import Quickshell
 import QtQuick
 import QtQuick.Effects
-import "Workspace"
+import "../Workspace"
+import ".."
 
 Scope {
     id: root

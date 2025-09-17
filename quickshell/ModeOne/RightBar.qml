@@ -6,9 +6,10 @@ import Quickshell.Wayland
 import Quickshell
 import Quickshell.Hyprland
 import QtQuick
-import "Workspace"
-import "Tray" as Tray
-import "SystemStats" as Stat
+import "../Workspace"
+import "../Tray" as Tray
+import "../SystemStats" as Stat
+import ".."
 
 Scope {
     id: root

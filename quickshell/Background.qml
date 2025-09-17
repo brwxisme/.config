@@ -63,7 +63,7 @@ Scope {
                 Process {
                     id: get_list
                     command: ["ls", root.sources + bar_man.screen.name]
-                    running: false
+                    running: true
 
                     stdout: StdioCollector {
                         onStreamFinished: {

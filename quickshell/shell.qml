@@ -4,7 +4,8 @@ import Quickshell
 import QtQuick
 import "OSDs" as OSD
 import "VerticalWorkspace"
-import "Components"
+import "ModeTwo"
+import "ModeOne"
 
 ShellRoot {
     // Background {}

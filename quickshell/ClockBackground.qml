@@ -53,6 +53,7 @@ Scope {
                         font.family: "Fira Code"
                         font.weight: 600
                         font.pointSize: 36
+                        antialiasing: true
                         // width: 320
                         // height: 8
                         color: MyColor.primary
@@ -72,10 +73,13 @@ Scope {
                     Text {
                         id: date
 
+                        // antialiasing: true
                         // visible: false
                         font.family: "Fira Code"
                         font.weight: 600
                         font.pointSize: 18
+                        // style: Text.Outline
+                        // styleColor: "red"
                         // width: 320
                         // height: 8
                         color: MyColor.primary

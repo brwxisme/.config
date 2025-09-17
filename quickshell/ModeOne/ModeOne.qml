@@ -2,20 +2,20 @@
 //@ pragma IconTheme Flatery-Indigo-Dark
 import Quickshell
 import QtQuick
-import "OSDs" as OSD
-import "VerticalWorkspace"
-import "Components"
+import "../OSDs" as OSD
+import "../Components"
+import ".." as QR
 
 ShellRoot {
-    Background {}
-    ClockBackground {}
+    QR.Background {}
+    QR.ClockBackground {}
     OSD.Osds {
         id: osds
     }
     WorkspaceIndicatorWIP {}
     RightBar {}
     LeftBar {}
-    BarToggle {}
+    QR.BarToggle {}
     // CurlyWorkspaceIndicator {}
     // VerticalWorkspace {}
     // PanelWindow {

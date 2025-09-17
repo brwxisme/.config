@@ -1,15 +1,17 @@
 pragma ComponentBehavior: Bound
 import Quickshell.Io
 import QtQuick
+import QtQuick.Layouts
 import Quickshell
 import Quickshell.Wayland
 import Quickshell
 import Quickshell.Hyprland
 import QtQuick
-import "Workspace"
-import "Tray" as Tray
-import "SystemStats" as Stat
-import "Components"
+import "../Workspace"
+import "../Tray" as Tray
+import "../SystemStats" as Stat
+import "../Components"
+import ".."
 
 Scope {
     id: root
@@ -29,13 +31,15 @@ Scope {
                 visible: true
                 property bool show: true
                 color: "transparent"
+                // color: "pink"
                 implicitHeight: recta.implicitHeight + 4
                 implicitWidth: recta.implicitWidth + 32
                 screen: modelData
-                margins.left: 16
+                margins.left: 32
+                // anchors.mar: 128
                 anchors {
                     bottom: true
-                    left: true
+                    // left: true
                 }
                 onShowChanged: {
                     if (show) {
@@ -45,64 +49,35 @@ Scope {
                     }
                 }
 
-                // CurlyBoxHorizontal {
-                //     id: recta
-                //     anchors.bottom: parent.bottom
-                //     totalWidth: 256 + 16
-                //     totalHeight: 24
-                //     Row {
-                //         id: row
-                //         // anchors.fill: parent
-                //         anchors.centerIn: parent
-                //         // anchors.bottomMargin: 8
-                //         spacing: 0
-                //         // anchors.horizontalCenter: parent.horizontalCenter
-                //         Item {
-                //             implicitWidth: 12
-                //             implicitHeight: 8
-                //         }
-                //         Stat.Stats {}
-                //         Item {
-                //             implicitWidth: 8
-                //             implicitHeight: 8
-                //         }
-                //     }
-                // }
-
-                Rectangle {
+                CurlyBoxHorizontal {
                     id: recta
-
-                    anchors.left: parent.left
-                    // anchors.rightMargin: 16
-
-                    // y: -2
-                    anchors.leftMargin: 8
-                    implicitWidth: row.implicitWidth + 8
-                    implicitHeight: row.implicitHeight + 4
-                    // color: "transparent"
-                    color: MyColor.bg
-                    // radius: 32
-                    topLeftRadius: 64
-                    topRightRadius: 64
-                    // border.color: MyColor.primary
-                    border.color: "transparent"
-                    border.width: 2
-                    y: 6
-                    Row {
-                        id: row
-                        anchors.fill: parent
-                        anchors.centerIn: parent
-                        // anchors.bottomMargin: 8
-                        spacing: 0
-                        // anchors.horizontalCenter: parent.horizontalCenter
-                        Item {
-                            implicitWidth: 12
-                            implicitHeight: 8
-                        }
-                        Stat.Stats {}
-                        Item {
-                            implicitWidth: 8
-                            implicitHeight: 8
+                    anchors.bottom: parent.bottom
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    // totalWidth: 256 + 16
+                    totalWidth: container.implicitWidth
+                    // totalWidth: row.implicitWidth + 0
+                    totalHeight: container.implicitHeight
+                    Rectangle {
+                        id: container
+                        color: "transparent"
+                        implicitWidth: 256 + 80
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        // minimumWidth: 320
+                        implicitHeight: 20
+                        Text {
+                            id: time
+                            // visible: false
+                            text: Globals.time + "  " + Globals.date
+                            // text: "brew@nixos"
+                            font.family: "Fira Code"
+                            font.pointSize: 10
+                            font.weight: 600
+                            color: MyColor.primary
+                            // anchors.verticalCenter: parent.verticalCenter
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            // anchors.topMargin: 32
+                            y: 3
+                            // minimumPointSize: 12
                         }
                     }
                 }
@@ -127,6 +102,7 @@ Scope {
             }
             function updateOnWindowCount(): void {
                 bar.show = Globals.window_count[modelData.name] == 0;
+                // time.visible = Globals.window_count[modelData.name] != 0;
                 if (bar.show) {
                     // recta.border.color = Globals.window_count[modelData.name] != 0 ? MyColor.primary : "transparent";
                     recta.borderColor = Globals.window_count[modelData.name] != 0 ? MyColor.primary : "transparent";
