@@ -124,4 +124,11 @@ Singleton {
             timeProc.running = true;
         }
     }
+    GlobalShortcut {
+        appid: "quickshell"
+        name: "open-bar"
+        onReleased: {
+            root.showBar("HDMI-A-1");
+        }
+    }
 }

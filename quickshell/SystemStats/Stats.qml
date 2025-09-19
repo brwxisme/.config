@@ -44,15 +44,15 @@ Rectangle {
             clr: MyColor.yellow
             tooltip_text: `${(CurrentStats.cpuPerc * 100).toFixed(2)}` + "%"
         }
-        LineProgressBar {
-            id: volume_stat
-            text: ""
-            // text: "" + `${(CurrentStats.cpuPerc * 100).toFixed(2)}`
-            value: (Pipewire.defaultAudioSink?.audio.volume ?? 0)
-            max_value: 1
-            clr: MyColor.blue
-            tooltip_text: `${((Pipewire.defaultAudioSink?.audio.volume ?? 0) * 100).toFixed(0)}` + "%"
-        }
+        // LineProgressBar {
+        //     id: volume_stat
+        //     text: ""
+        //     // text: "" + `${(CurrentStats.cpuPerc * 100).toFixed(2)}`
+        //     value: (Pipewire.defaultAudioSink?.audio.volume ?? 0)
+        //     max_value: 1
+        //     clr: MyColor.blue
+        //     tooltip_text: `${((Pipewire.defaultAudioSink?.audio.volume ?? 0) * 100).toFixed(0)}` + "%"
+        // }
         // ProgressBar {
         //     id: memory_stats_2
         //     value: CurrentStats.mem_used_gb

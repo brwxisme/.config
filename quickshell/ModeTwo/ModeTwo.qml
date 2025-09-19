@@ -9,7 +9,7 @@ import "../Components"
 
 ShellRoot {
     Background {}
-    ClockBackground {}
+    // ClockBackground {}
     OSD.Osds {
         id: osds
     }

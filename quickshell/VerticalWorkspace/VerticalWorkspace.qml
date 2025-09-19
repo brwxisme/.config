@@ -39,7 +39,7 @@ Scope {
                 // anchors.left: true
                 anchors.left: screen.name == "HDMI-A-1"
                 anchors.right: screen.name == "DP-2"
-                height: curly.implicitHeight + 64
+                implicitHeight: curly.implicitHeight + 64
                 width: 20
                 color: "transparent"
 

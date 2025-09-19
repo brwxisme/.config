@@ -35,23 +35,24 @@ Scope {
                 implicitHeight: recta.implicitHeight + 4
                 implicitWidth: recta.implicitWidth + 32
                 screen: modelData
-                margins.left: 32
+                // margins.left: 32
                 // anchors.mar: 128
                 anchors {
-                    bottom: true
-                    // left: true
+                    // bottom: true
+                    top: true
                 }
                 onShowChanged: {
                     if (show) {
-                        margins.bottom = 0;
+                        margins.top = 0;
                     } else {
-                        margins.bottom = -32;
+                        margins.top = -32;
                     }
                 }
 
                 CurlyBoxHorizontal {
                     id: recta
-                    anchors.bottom: parent.bottom
+                    onBot: false
+                    anchors.top: parent.top
                     anchors.horizontalCenter: parent.horizontalCenter
                     // totalWidth: 256 + 16
                     totalWidth: container.implicitWidth
@@ -76,7 +77,7 @@ Scope {
                             // anchors.verticalCenter: parent.verticalCenter
                             anchors.horizontalCenter: parent.horizontalCenter
                             // anchors.topMargin: 32
-                            y: 3
+                            y: 1
                             // minimumPointSize: 12
                         }
                     }

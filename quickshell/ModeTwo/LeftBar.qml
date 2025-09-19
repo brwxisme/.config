@@ -54,16 +54,17 @@ Scope {
                     anchors.bottom: parent.bottom
                     anchors.horizontalCenter: parent.horizontalCenter
                     // totalWidth: 256 + 16
-                    totalWidth: row.implicitWidth + 0
+                    totalWidth: stats.implicitWidth + 80
                     totalHeight: 20
                     Rectangle {
                         anchors.centerIn: parent
 
                         anchors.fill: parent
                         color: "transparent"
-                        implicitWidth: 256
+                        // implicitWidth: 256
                         height: 20
                         Stat.Stats {
+                            id: stats
                             anchors.horizontalCenter: parent.horizontalCenter
                         }
                     }
