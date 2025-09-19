@@ -11,6 +11,7 @@ alias dlmusic="yt-dlp -f 140 "
 alias resdp="systemctl restart display-manager.service"
 alias gp="git push"
 alias lg="lazygit"
+alias tks="tmux kill-server"
 
 alias ncfg="sudo nvim /etc/nixos/ "
 alias nclean="sudo nix-collect-garbage -d"
@@ -18,13 +19,12 @@ alias rbs="sudo nixos-rebuild switch"
 
 
 
-alias mma='cd $HOME/SharedHDD/GodotProjects/MMASim/'
-alias mma_patch='cd $HOME/SharedHDD/GodotProjects/MMA_LifeSim/'
 alias dcd="cd /home/brew/SharedHDD/GodotProjects/TowDef/"
 alias tbp="cd /home/brew/SharedHDD/GodotProjects/TurnBasePlatform/"
 alias axf="cd /home/brew/SharedHDD/GodotProjects/newAxes/axesfull-godot"
 alias landing_page="cd /home/brew/Documents/LandingPage/"
-alias steady="cd $HOME/Documents/steadyfarm/"
+# alias steady="cd $HOME/Documents/steadyfarm/"
+alias steady="~/Config_BRWXISME/tmux/steady_session.sh"
 alias fctry="cd /home/brew/Documents/newfactory/"
 alias marble="cd /home/brew/Documents/marble/MarbleMadness/"
 alias aok="cd /home/brew/Documents/AoK/Age_of_Kings_DEMO/"
@@ -45,10 +45,6 @@ for i in *.png; do magick "$i" "JPGs/${i%.*}.jpg"; done'
 
 alias spacetime="$HOME/.local/bin/spacetime"
 alias hybsleep="systemctl hybrid-sleep"
-set -o vi
-set show-mode-in-prompt on
-set vi-cmd-mode-string "\1\e[2 q\2"
-set vi-ins-mode-string "\1\e[6 q\2"
 
 function nvgd(){
 	if [ -z ${1+x} ]; 
@@ -75,3 +71,13 @@ function yz() {
 	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
 	rm -f -- "$tmp"
 }
+
+
+function start_tmux(){
+	tmux has-session 2>/dev/null
+	if [ $? != 0 ]; then
+		tmux new-session -d -s config_session
+		tmux source-file ~/Config_BRWXISME/tmux/tmux.conf
+	fi
+}
+export -f start_tmux
