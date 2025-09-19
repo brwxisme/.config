@@ -32,17 +32,14 @@ alias aok="cd /home/brew/Documents/AoK/Age_of_Kings_DEMO/"
 
 alias brc="nv $HOME/.bashrc"
 alias .files="nvim $HOME/.config/"
-# alias nvgd="nvim --listen ~/.cache/nvim/godot.pipe ."
-# alias nvgd="nvim --listen ./godothost"
-# alias nixcfg="sudo nvim /etc/nixos/configuration.nix"
+alias bcfg="cd ~/Config_BRWXISME/ && nv"
 
 
 alias utube_music="floorp -p music"
-# alias wakeup_in="sudo rtcwake -m no -s"
-# alias wakeup_in4="sudo rtcwake -m no -s 14400"
-# alias wakeup_in2="sudo rtcwake -m no -s 7200"
+
 alias to_ogv='mkdir OGVs
 for i in *.mp4; do ffmpeg -i "$i" -q:v 9 -q:a 9 "OGVs/${i%.*}.ogv"; done'
+
 alias to_jpg='mkdir JPGs
 for i in *.png; do magick "$i" "JPGs/${i%.*}.jpg"; done'
 
@@ -53,17 +50,7 @@ set show-mode-in-prompt on
 set vi-cmd-mode-string "\1\e[2 q\2"
 set vi-ins-mode-string "\1\e[6 q\2"
 
-# set vi-ins-mode-string "+"
-# set vi-cmd-mode-string ":"
-# set vi-cmd-mode-string "\1\e[1;31m\2:\1\e
-# set vi-ins-mode-string \1\e[6 q\2
-# set vi-cmd-mode-string \1\e[2 q\2[0m\2
-# set vi-cmd-mode-string "\1\e[2 q\2cmd"
-# set vi-ins-mode-string "\1\e[6 q\2ins"
-
-
 function nvgd(){
-	# nvim --listen ./godothost
 	if [ -z ${1+x} ]; 
 		then nvim --listen ./godothost
 		else nvim --listen ./godothost$1; 
@@ -79,3 +66,12 @@ export -f wakeup_in_h
 
 
 #     ffmpeg -i output_%04d.png -vf "scale=200:-1,tile=5x5" contact_sheet.jpg
+
+
+function yz() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
+}
