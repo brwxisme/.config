@@ -25,7 +25,7 @@ if [ $? != 0 ]; then
 	tmux send-keys -t "$PROJ:server.3" 'spacetime start' 
 
 
-	tmux select-window -t $PROJ:server
+	tmux select-window -t $PROJ:editor
 fi
 
 tmux attach-session -t $PROJ

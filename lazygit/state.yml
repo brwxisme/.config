@@ -1,0 +1,14 @@
+lastupdatecheck: 1758296686
+recentrepos:
+    - /home/brew/Config_BRWXISME
+startuppopupversion: 5
+lastversion: 0.51.1
+customcommandshistory: []
+hidecommandlog: false
+ignorewhitespaceindiffview: false
+diffcontextsize: 3
+renamesimilaritythreshold: 50
+localbranchsortorder: recency
+remotebranchsortorder: alphabetical
+gitlogorder: topo-order
+gitlogshowgraph: always
