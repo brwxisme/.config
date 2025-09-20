@@ -2,6 +2,9 @@ eval "$(oh-my-posh init bash)"
 # eval "$(oh-my-posh init bash --config ~/brwxisme.omp.json)"
 eval "$(oh-my-posh init bash --config ~/Config_BRWXISME/bash/new_theme.omp.json)"
 
+# export TERM="kitty"
+# export TERMINAL="kitty"
+
 alias ~="cd ~"
 alias ls="lsd"
 alias nv="nvim"

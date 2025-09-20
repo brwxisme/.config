@@ -11,7 +11,7 @@ if [ $? != 0 ]; then
 	tmux new-session -d -s $PROJ -n "editor"
 
 	tmux send-keys -t $PROJ:editor "cd ~/Documents/steadyfarm/" C-m
-	tmux send-keys -t $PROJ:editor "nv" C-m
+	tmux send-keys -t $PROJ:editor "nvgd" C-m
 
 	tmux new-window  -t $PROJ -n "git"
 	tmux send-keys -t $PROJ:git "cd ~/Documents/steadyfarm/" C-m
