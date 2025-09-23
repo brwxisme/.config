@@ -15,6 +15,7 @@ alias resdp="systemctl restart display-manager.service"
 alias gp="git push"
 alias lg="lazygit"
 alias tks="tmux kill-server"
+alias adbrestart="adb kill-server && adb start-server"
 
 alias ncfg="sudo nvim /etc/nixos/ "
 alias nclean="sudo nix-collect-garbage -d"
@@ -26,8 +27,8 @@ alias dcd="cd /home/brew/SharedHDD/GodotProjects/TowDef/"
 alias tbp="cd /home/brew/SharedHDD/GodotProjects/TurnBasePlatform/"
 alias axf="cd /home/brew/SharedHDD/GodotProjects/newAxes/axesfull-godot"
 alias landing_page="cd /home/brew/Documents/LandingPage/"
-# alias steady="cd $HOME/Documents/steadyfarm/"
-alias steady="~/Config_BRWXISME/tmux/steady_session.sh"
+alias steady="cd $HOME/Documents/steadyfarm/ && nvgd"
+# alias steady="~/Config_BRWXISME/tmux/steady_session.sh"
 alias fctry="cd /home/brew/Documents/newfactory/"
 alias marble="cd /home/brew/Documents/marble/MarbleMadness/"
 alias aok="cd /home/brew/Documents/AoK/Age_of_Kings_DEMO/"
@@ -46,6 +47,7 @@ for i in *.mp4; do ffmpeg -i "$i" -q:v 9 -q:a 9 "OGVs/${i%.*}.ogv"; done'
 alias to_jpg='mkdir JPGs
 for i in *.png; do magick "$i" "JPGs/${i%.*}.jpg"; done'
 
+alias steady_server="~/Config_BRWXISME/tmux/steady_server.sh"
 alias spacetime="$HOME/.local/bin/spacetime"
 alias hybsleep="systemctl hybrid-sleep"
 
