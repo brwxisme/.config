@@ -25,6 +25,7 @@ Singleton {
         "DP-2": 0,
         "HDMI-A-1": 0
     }
+    property bool showingBar: false
 
     property string time
     property string date
@@ -128,7 +129,11 @@ Singleton {
         appid: "quickshell"
         name: "open-bar"
         onReleased: {
-            root.showBar("HDMI-A-1");
+            root.toggleBar();
         }
+    }
+    function toggleBar(): void {
+        root.showingBar = !root.showingBar;
+        root.showBar("HDMI-A-1");
     }
 }

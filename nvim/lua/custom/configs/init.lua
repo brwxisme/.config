@@ -34,7 +34,7 @@ end, { noremap = true, desc = 'Close Oil buffer if active' })
 -- vim.keymap.set('n', '<C>,', '<cmd>nohlsearch<CR>')
 -- vim.keymap.set('n', '<C-,>', '<Plug>(Comment.toggle.linewise)', { desc = 'Toggle comment' })
 --
-vim.keymap.set({ 'n' }, '<C-m>', 'gcc', { remap = true, desc = 'Toggle comment' })
+vim.keymap.set({ 'n' }, '<C-,>', 'gcc', { remap = true, desc = 'Toggle comment' })
 --
 -- vim.keymap.set('n', '<C-,>', function()
 --   vim.cmd.norm 'gcc'

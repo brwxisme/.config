@@ -94,7 +94,7 @@ Scope {
                 }
                 function onShowBar(val: string): void {
                     if (modelData.name == val) {
-                        bar.show = !bar.show;
+                        bar.show = Globals.showingBar;
 
                         // recta.border.color = Globals.window_count[modelData.name] != 0 ? MyColor.primary : "transparent";
                         recta.borderColor = Globals.window_count[modelData.name] != 0 ? MyColor.primary : "transparent";

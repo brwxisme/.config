@@ -1,6 +1,6 @@
 eval "$(oh-my-posh init bash)"
 # eval "$(oh-my-posh init bash --config ~/brwxisme.omp.json)"
-eval "$(oh-my-posh init bash --config ~/Config_BRWXISME/bash/new_theme.omp.json)"
+eval "$(oh-my-posh init bash --config /home/brew/Config_BRWXISME/bash/new_theme.omp.json)"
 
 # export TERM="kitty"
 # export TERMINAL="kitty"
@@ -15,7 +15,9 @@ alias resdp="systemctl restart display-manager.service"
 alias gp="git push"
 alias lg="lazygit"
 alias tks="tmux kill-server"
-alias adbrestart="adb kill-server && adb start-server"
+alias resadb="adb kill-server && adb start-server"
+alias dumpsupa="supabase db dump --local -f /home/brew/Documents/supabasedump/$(date +%Y-%m-%d)_dump.sql"
+alias ressupa="supabase stop && supabase start"
 
 alias ncfg="sudo nvim /etc/nixos/ "
 alias nclean="sudo nix-collect-garbage -d"

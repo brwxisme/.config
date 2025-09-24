@@ -7,7 +7,8 @@
         "purple":"#a48cf2",
         "lavender": "#B4BEFE",
         "blue":  "#04d1f9",
-        "green":  "#37f499"
+        "green":  "#37f499",
+        "red":"#f16c75"
   },
   "blocks": [
     {
@@ -29,6 +30,9 @@
         {
           //"foreground": "p:os",
           "foreground": "p:green",
+          "foreground_templates": [
+            "{{ if .Root }}p:red{{ else }}p:green{{ end }}"
+          ],
           "style": "plain",
           "template": " {{ .UserName }}@{{ .HostName }}",
           "type": "session"

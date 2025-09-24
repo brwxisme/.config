@@ -79,6 +79,9 @@ Scope {
                     propagateComposedEvents: true
 
                     onEntered: {
+                        if (Globals.showingBar) {
+                            return;
+                        }
                         pnl.inverted = !pnl.inverted;
                         back_to_original.restart();
                     }
