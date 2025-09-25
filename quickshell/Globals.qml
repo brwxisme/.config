@@ -136,4 +136,10 @@ Singleton {
         root.showingBar = !root.showingBar;
         root.showBar("HDMI-A-1");
     }
+    function shouldShow(mon_name: string): bool {
+        if (root.showingBar) {
+            return true;
+        }
+        return window_count[mon_name] == 0;
+    }
 }

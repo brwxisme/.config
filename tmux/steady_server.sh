@@ -15,7 +15,10 @@ if [ $? != 0 ]; then
 	tmux send-keys -t $PROJ:DB.1 "sudo dockerd" C-m
 
 	tmux new-window  -t $PROJ -n "MP_SERVER"
-	tmux send-keys -t $PROJ:MP_SERVER "spacetime start" C-m
+	tmux split-window -v -t $PROJ:MP_SERVER
+	tmux send-keys -t $PROJ:MP_SERVER.1 "spacetime start" C-m
+	sleep 1
+	tmux send-keys -t $PROJ:MP_SERVER.2 "spacetime logs steady -f" C-m
 
 	tmux select-window -t $PROJ:DB.1
 	tmux select-pane -t $PROJ:DB.1

@@ -39,7 +39,7 @@ Scope {
                 }
                 MouseArea {
                     anchors.fill: parent
-                    onDoubleClicked: Globals.showBar(modelData.name)
+                    onDoubleClicked: Globals.toggleBar()
                 }
             }
         }

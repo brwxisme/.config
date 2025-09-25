@@ -22,19 +22,13 @@
           "type": "text"
         },
         {
-          "foreground": "p:purple",
-          "style": "plain",
-          "template": "{{.Icon}}",
-          "type": "os"
-        },
-        {
           //"foreground": "p:os",
           "foreground": "p:green",
           "foreground_templates": [
             "{{ if .Root }}p:red{{ else }}p:green{{ end }}"
           ],
           "style": "plain",
-          "template": " {{ .UserName }}@{{ .HostName }}",
+          "template": " {{ .UserName }}@{{ .HostName }} ",
           "type": "session"
         },
         {
@@ -48,7 +42,7 @@
           "properties": {
 //            "folder_icon": "..\ue5fe..",
 //            "folder_icon": "\uf4d4",
-            "folder_icon": "~~",
+            "folder_icon": "~",
             "home_icon": "~",
             "style": "agnoster_short"
           },
@@ -72,8 +66,6 @@
             "fetch_upstream_icon": true
           },
           "style": "diamond",
-//          "trailing_diamond": "<transparent,background>\ue0ba",
- //         "leading_diamond": "<transparent,background>\ue0bc",
           "template": "{{ .UpstreamIcon }} {{ .HEAD }} {{if .BranchStatus }} {{ .BranchStatus }} {{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} | {{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }}",
           "type": "git"
         }

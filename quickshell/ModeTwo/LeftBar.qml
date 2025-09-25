@@ -80,21 +80,18 @@ Scope {
                     updateOnWindowCount();
                 }
                 function onShowBar(val: string): void {
-                    if (modelData.name == val) {
-                        bar.show = Globals.showingBar;
-
-                        // recta.border.color = Globals.window_count[modelData.name] != 0 ? MyColor.primary : "transparent";
-                        recta.borderColor = Globals.window_count[modelData.name] != 0 ? MyColor.primary : "transparent";
-                    }
+                    updateOnWindowCount();
+                // if (modelData.name == val) {
+                //     bar.show = Globals.showingBar;
+                //
+                //     // recta.border.color = Globals.window_count[modelData.name] != 0 ? MyColor.primary : "transparent";
+                //     recta.borderColor = Globals.window_count[modelData.name] != 0 ? MyColor.primary : "transparent";
+                // }
                 }
             }
             function updateOnWindowCount(): void {
-                bar.show = Globals.window_count[modelData.name] == 0;
-                // time.visible = Globals.window_count[modelData.name] != 0;
-                if (bar.show) {
-                    // recta.border.color = Globals.window_count[modelData.name] != 0 ? MyColor.primary : "transparent";
-                    recta.borderColor = Globals.window_count[modelData.name] != 0 ? MyColor.primary : "transparent";
-                }
+                bar.show = Globals.shouldShow(modelData.name);
+                recta.borderColor = Globals.window_count[modelData.name] != 0 ? MyColor.primary : "transparent";
             }
         }
     }
