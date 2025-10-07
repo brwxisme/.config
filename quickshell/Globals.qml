@@ -135,11 +135,24 @@ Singleton {
     function toggleBar(): void {
         root.showingBar = !root.showingBar;
         root.showBar("HDMI-A-1");
+        if (root.showingBar) {
+            auto_hide.start();
+        }
     }
     function shouldShow(mon_name: string): bool {
         if (root.showingBar) {
             return true;
         }
         return window_count[mon_name] == 0;
+    }
+    Timer {
+        id: auto_hide
+        interval: 10000
+        running: false
+        onTriggered: {
+            if (root.showingBar) {
+                root.toggleBar();
+            }
+        }
     }
 }

@@ -732,6 +732,15 @@ require('lazy').setup({
         else
           lsp_format_opt = 'fallback'
         end
+        -- Disable autoformat for files in a certain path
+        local current_cwd = vim.fn.getcwd()
+        if current_cwd:match 'AoK' then
+          return
+        end
+        -- local bufname = vim.api.nvim_buf_get_name(bufnr)
+        -- if bufname:match 'src/World' then
+        --   return
+        -- end
         return {
           timeout_ms = 1500,
           lsp_format = lsp_format_opt,

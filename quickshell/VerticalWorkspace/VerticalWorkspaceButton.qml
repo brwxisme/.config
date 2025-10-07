@@ -31,7 +31,7 @@ Rectangle {
     // implicitHeight: 24
     height: {
         if (current || active) {
-            return base_size * 2;
+            return base_size * 3;
             // return 20;
         } else {
             return base_size;

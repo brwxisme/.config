@@ -19,9 +19,11 @@ Rectangle {
         verticalCenter: parent.verticalCenter
         horizontalCenter: parent.horizontalCenter
     }
+    implicitHeight: col.implicitHeight
     Column {
+        id: col
         spacing: 4
-        // anchors.fill: parent
+        anchors.fill: parent
         anchors {
             verticalCenter: parent.verticalCenter
             horizontalCenter: parent.horizontalCenter
@@ -36,7 +38,7 @@ Rectangle {
             // model: 5
             VerticalWorkspaceButton {
                 id: ws_item
-                base_size: 16
+                base_size: 8
 
                 my_base: root.my_base
                 ws_index: index + starting_idx

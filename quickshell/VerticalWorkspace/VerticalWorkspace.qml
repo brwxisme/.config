@@ -40,13 +40,13 @@ Scope {
                 anchors.left: screen.name == "HDMI-A-1"
                 anchors.right: screen.name == "DP-2"
                 implicitHeight: curly.implicitHeight + 64
-                width: 20
+                width: curly.totalWidth
                 color: "transparent"
 
                 CurlyBox {
                     id: curly
-                    totalHeight: 256 - 64
-                    totalWidth: 20
+                    totalHeight: container.implicitHeight + 64
+                    totalWidth: 18
                     // onLeft: true
                     onLeft: modelData.name == "HDMI-A-1"
 
@@ -55,7 +55,8 @@ Scope {
                     anchors.right: !onLeft ? parent.right : undefined
                     anchors.verticalCenter: parent.verticalCenter
                     WorkspaceButtonContainer {
-                        implicitHeight: parent.implicitHeight
+                        id: container
+                        // implicitHeight: parent.implicitHeight
                         // implicitWidth: 20
                         // color: "pink"
                         scrn: modelData

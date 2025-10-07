@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-aplay /home/brew/.config/Assets_brwx/yogg.wav
+aplay /home/brew/Config_BRWXISME/Assets_brwx/yogg.wav
