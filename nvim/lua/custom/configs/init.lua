@@ -1,3 +1,9 @@
+if os.getenv 'USER' == 'root' then
+  vim.cmd.colorscheme 'gruvbox'
+else
+  vim.cmd.colorscheme 'eldritch'
+end
+
 vim.o.tabstop = 4
 vim.o.expandtab = false
 vim.o.tabstop = 8
@@ -56,3 +62,23 @@ require('telescope').setup {
     },
   },
 }
+
+local h = require 'harpoon'
+
+local function toggle_menu_fixed_height(height)
+  local list = h:list()
+  h.ui:toggle_quick_menu(list, {
+    ui_width_ratio = 0.6,
+    border = 'rounded',
+    title_pos = 'center',
+  })
+  -- force resize shortly after it appears
+  vim.defer_fn(function()
+    local win = vim.api.nvim_get_current_win()
+    vim.api.nvim_win_set_height(win, height)
+  end, 10)
+end
+
+vim.keymap.set('n', '<A-e>', function()
+  toggle_menu_fixed_height(10)
+end)

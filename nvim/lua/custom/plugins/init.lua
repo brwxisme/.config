@@ -215,36 +215,24 @@ return {
           sync_on_ui_close = true,
         },
       }
-      vim.keymap.set('n', '<leader>a', function()
-        harpoon:list():append()
-      end)
+
       vim.keymap.set('n', '<C-h>', function()
-        harpoon.ui:toggle_quick_menu(harpoon:list())
+        harpoon.ui:toggle_quick_menu(harpoon:list(), { ui_width_ratio = 0.6, ui_height_ratio = 0.5, border = 'rounded', title_pos = 'center' })
       end)
 
-      vim.keymap.set('n', '<A-0>', function()
-        harpoon:list():select(1)
-      end)
-      vim.keymap.set('n', '<A-9>', function()
-        harpoon:list():select(2)
-      end)
-      vim.keymap.set('n', '<A-8>', function()
-        harpoon:list():select(3)
-      end)
-      vim.keymap.set('n', '<A-7>', function()
-        harpoon:list():select(4)
-      end)
-      vim.keymap.set('n', '<A-6>', function()
-        harpoon:list():select(5)
-      end)
+      for i = 1, 10 do
+        local key = (i == 10) and '0' or tostring(i)
+        vim.keymap.set('n', '<leader>a' .. key, function()
+          harpoon:list():replace_at(i)
+        end, { desc = 'Harpoon: assign slot ' .. i })
+      end
 
-      -- Toggle previous & next buffers stored within Harpoon list
-      vim.keymap.set('n', '<C-S-P>', function()
-        harpoon:list():prev()
-      end)
-      vim.keymap.set('n', '<C-S-N>', function()
-        harpoon:list():next()
-      end)
+      for i = 1, 10 do
+        local key = (i == 10) and '0' or tostring(i)
+        vim.keymap.set('n', '<A-' .. key .. '>', function()
+          harpoon:list():select(i)
+        end, { desc = 'Harpoon: jump to slot ' .. i })
+      end
     end,
   },
 }
