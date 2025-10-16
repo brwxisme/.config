@@ -1,5 +1,5 @@
 if os.getenv 'USER' == 'root' then
-  vim.cmd.colorscheme 'gruvbox'
+  vim.cmd.colorscheme 'kanagawa-dragon'
 else
   vim.cmd.colorscheme 'eldritch'
 end

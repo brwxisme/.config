@@ -21,7 +21,7 @@ alias dumpsupa="supabase db dump --local -f /home/brew/Documents/supabasedump/sc
 alias dumptosteady="supabase db dump --local -f /home/brew/Documents/SteadyHaven/Supabase/supabasedump/schema.sql"
 alias ressupa="supabase stop && sleep 1 && supabase start"
 
-alias ncfg="sudo nvim /etc/nixos/ "
+alias ncfg="sudo sh -c 'cd /etc/nixos/ && nvim'"
 alias nclean="sudo nix-collect-garbage -d"
 alias rbs="sudo nixos-rebuild switch"
 
