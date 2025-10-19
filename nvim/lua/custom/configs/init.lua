@@ -4,7 +4,8 @@ else
   vim.cmd.colorscheme 'eldritch'
 end
 
-vim.o.tabstop = 4
+-- vim.o.smartindent = true
+vim.o.relativenumber = true
 vim.o.expandtab = false
 vim.o.tabstop = 8
 vim.o.shiftwidth = 0
