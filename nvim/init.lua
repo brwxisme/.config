@@ -665,9 +665,11 @@ require('lazy').setup({
       -- }
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = vim.tbl_deep_extend('force', capabilities, require('blink.cmp').get_lsp_capabilities())
-      -- require('lspconfig').gdscript.setup(capabilities)
-      require('lspconfig').gdscript.setup { capabilities = capabilities }
-
+      require('lspconfig').gdscript.setup(capabilities)
+      -- require('lspconfig').gdscript.setup { capabilities = capabilities }
+      -- vim.lsp.config('gdscript').setup {
+      --   capabilities,
+      -- }
       -- Enable the following language servers
       --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
       --
@@ -1049,6 +1051,6 @@ require('lazy').setup({
 --
 require 'custom.configs'
 require 'custom.gdscript'
-require('lspconfig').qmlls.setup {
-  cmd = { 'qmlls', '-E' },
-}
+-- require('lspconfig').qmlls.setup {
+--   cmd = { 'qmlls', '-E' },
+-- }

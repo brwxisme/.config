@@ -8,6 +8,7 @@ eval "$(oh-my-posh init bash --config /home/brew/Config_BRWXISME/bash/new_theme.
 alias ~="cd ~"
 alias ls="lsd"
 alias nv="nvim"
+alias oi="nvim -c 'Oil'"
 alias dlph="yt-dlp -f 720p "
 alias dlcheck="yt-dlp -F "
 alias dlmusic="yt-dlp -f 140 "
