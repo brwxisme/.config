@@ -96,7 +96,7 @@ return {
     ---@module 'oil'
     ---@type oil.SetupOpts
     opts = {
-      default_file_explorer = false,
+      default_file_explorer = true,
       win_options = {
         wrap = false,
         signcolumn = 'no',
@@ -131,6 +131,73 @@ return {
           return defaults
         end,
       },
+      keymaps = {
+        ['<CR>'] = function()
+          local oil = require 'oil'
+          local actions = require 'oil.actions'
+
+          local entry = oil.get_cursor_entry()
+          if not entry then
+            return
+          end
+
+          local name = entry.name
+          local path = oil.get_current_dir() .. name
+
+          -- handle directories
+          local fs = vim.loop.fs_stat(path)
+          if fs and fs.type == 'directory' then
+            return oil.select { vertical = false }
+          end
+
+          -- 🎞️ detect video or image by extension
+          local is_media = name:match '%.png$'
+            or name:match '%.jpg$'
+            or name:match '%.jpeg$'
+            or name:match '%.gif$'
+            or name:match '%.webp$'
+            or name:match '%.bmp$'
+            or name:match '%.mp4$'
+            or name:match '%.mkv$'
+            or name:match '%.webm$'
+            or name:match '%.avi$'
+            or name:match '%.mov$'
+
+          if is_media then
+            actions.open_external.callback()
+          else
+            oil.select { vertical = false }
+          end
+        end,
+      },
+      -- keymaps = {
+      --   ['<CR>'] = function()
+      --     local oil = require 'oil'
+      --     local entry = oil.get_cursor_entry()
+      --     if not entry then
+      --       return
+      --     end
+      --
+      --     local name = entry.name
+      --     local path = oil.get_current_dir() .. name
+      --
+      --     -- if it's a directory, open it normally
+      --     local fs = vim.loop.fs_stat(path)
+      --     if fs and fs.type == 'directory' then
+      --       oil.select { vertical = false }
+      --       return
+      --     end
+      --
+      --     -- try to open using XDG (Linux) or 'open' (macOS)
+      --     local opener = vim.fn.has 'mac' == 1 and 'open' or 'xdg-open'
+      --     local ok = vim.fn.jobstart({ opener, path }, { detach = true })
+      --     if ok <= 0 then
+      --       print('❌ Failed to open file: ' .. path)
+      --     else
+      --       print('▶ Opened with system app: ' .. name)
+      --     end
+      --   end,
+      -- },
     },
     -- Optional dependencies
     dependencies = { { 'echasnovski/mini.icons', opts = {} } },
@@ -148,7 +215,7 @@ return {
         config = {
           header = vim.split(logo_two, '\n'),
           shortcut = {
-            { desc = '󰊳 Update', group = '@property', action = 'Lazy update', key = 'u' },
+            { desc = '󰊳 Update', icon_hl = '@variable', group = '@property', action = 'Lazy update', key = 'u' },
             {
               icon = ' ',
               icon_hl = '@variable',
@@ -158,14 +225,19 @@ return {
               key = 'f',
             },
             {
-              desc = ' Apps',
-              group = 'DiagnosticHint',
-              action = 'Telescope app',
-              key = 'a',
+              icon = ' ',
+              desc = 'New File',
+              group = 'Label',
+              icon_hl = '@variable',
+              -- action = 'Explore /home/brew/.config/',
+              action = 'enew',
+              key = 'd',
             },
             {
-              desc = ' dotfiles',
-              group = 'Number',
+              icon = ' ',
+              desc = 'Dotfiles',
+              group = 'Label',
+              icon_hl = '@variable',
               -- action = 'Explore /home/brew/.config/',
               action = 'Oil --float /home/brew/.config/',
               key = 'd',
@@ -220,49 +292,78 @@ return {
         },
       }
 
-      vim.keymap.set('n', '<C-h>', function()
-        harpoon.ui:toggle_quick_menu(harpoon:list(), { ui_width_ratio = 0.6, ui_height_ratio = 0.5, border = 'rounded', title_pos = 'center' })
-      end)
+      -- vim.keymap.set(
+      --   'n',
+      --   '<C-h>',
+      --   function() harpoon.ui:toggle_quick_menu(harpoon:list(), { ui_width_ratio = 0.6, ui_height_ratio = 0.5, border = 'rounded', title_pos = 'center' }) end
+      -- )
 
       for i = 1, 10 do
         local key = (i == 10) and '0' or tostring(i)
-        vim.keymap.set('n', '<leader>a' .. key, function()
-          harpoon:list():replace_at(i)
-        end, { desc = 'Harpoon: assign slot ' .. i })
+        vim.keymap.set('n', '<leader>a' .. key, function() harpoon:list():replace_at(i) end, { desc = 'Harpoon: assign slot ' .. i })
       end
 
       for i = 1, 10 do
         local key = (i == 10) and '0' or tostring(i)
-        vim.keymap.set('n', '<A-' .. key .. '>', function()
-          harpoon:list():select(i)
-        end, { desc = 'Harpoon: jump to slot ' .. i })
+        vim.keymap.set('n', '<A-' .. key .. '>', function() harpoon:list():select(i) end, { desc = 'Harpoon: jump to slot ' .. i })
       end
     end,
   },
   { 'habamax/vim-godot', event = 'VimEnter' },
+  -- { 'teatek/gdscript-extended-lsp.nvim', opts = {} },
+  -- {
+  --   'teatek/gdscript-extended-lsp.nvim',
+  --   opts = {
+  --     doc_file_extension = '.txt', -- Documentation file extension (can allow a better search in buffers list with telescope)
+  --     view_type = 'floating', -- Options : "current", "split", "vsplit", "tab", "floating"
+  --     split_side = false, -- (For split and vsplit only) Open on the right or top on false and on the left or bottom on true
+  --     keymaps = {
+  --       declaration = 'gd', -- Keymap to go to definition
+  --       close = { 'q', '<Esc>' }, -- Keymap for closing the documentation
+  --     },
+  --     floating_win_size = 0.8, -- Floating window size
+  --     picker = 'snackes', -- Options : "telescope", "snacks"
+  --   },
+  -- },
   {
-    'obsidian-nvim/obsidian.nvim',
-    version = '*', -- recommended, use latest release instead of latest commit
-    ft = 'markdown',
-    -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
-    -- event = {
-    --   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
-    --   -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/*.md"
-    --   -- refer to `:h file-pattern` for more examples
-    --   "BufReadPre path/to/my-vault/*.md",
-    --   "BufNewFile path/to/my-vault/*.md",
-    -- },
-    ---@module 'obsidian'
-    ---@type obsidian.config
-    opts = {
-      workspaces = {
-        {
-          name = 'ObsiVault',
-          path = '~/Documents/ObsiVault',
-        },
-      },
-
-      -- see below for full list of options 👇
+    'kndndrj/nvim-dbee',
+    dependencies = {
+      'MunifTanjim/nui.nvim',
     },
+    build = function()
+      -- Install tries to automatically detect the install method.
+      -- if it fails, try calling it with one of these parameters:
+      --    "curl", "wget", "bitsadmin", "go"
+      require('dbee').install()
+    end,
+    config = function()
+      require('dbee').setup(--[[optional config]])
+    end,
+  },
+  -- {
+  --   'OXY2DEV/markview.nvim',
+  --   lazy = false,
+  --
+  --   -- config = function()
+  --   --   require('markview').setup()
+  --   --   preview = {
+  --   --
+  --   --     icon_provider = 'mini',
+  --   --   }
+  --   -- end,
+  --   -- For blink.cmp's completion
+  --   -- source
+  --   -- dependencies = {
+  --   --     "saghen/blink.cmp"
+  --   -- },
+  -- },
+  {
+    'MeanderingProgrammer/render-markdown.nvim',
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-mini/mini.nvim' }, -- if you use the mini.nvim suite
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-mini/mini.icons' },        -- if you use standalone mini plugins
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+    ---@module 'render-markdown'
+    ---@type render.md.UserConfig
+    opts = {},
   },
 }

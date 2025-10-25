@@ -4,7 +4,8 @@ else
   vim.cmd.colorscheme 'eldritch'
 end
 
--- vim.o.smartindent = true
+vim.lsp.enable { 'gdscript', 'gdshader_lsp', 'marksman' }
+vim.o.smartindent = true
 vim.o.relativenumber = true
 vim.o.expandtab = false
 vim.o.tabstop = 8
@@ -18,9 +19,7 @@ vim.diagnostic.config {
 -- vim.keymap.set('n', '<C-e>', '<cmd>:Explore<CR>', { desc = 'Explore' })
 -- vim.keymap.set('n', '<C-e>', '<cmd>:Oil --float<CR>', { desc = 'Explore' })
 -- vim.keymap.set('n', '<C-e>', '<cmd>:Oil --toggle_float<CR>', { desc = 'Explore' })
-vim.keymap.set('n', '<C-e>', function()
-  require('oil').toggle_float()
-end)
+vim.keymap.set('n', '<C-e>', function() require('oil').toggle_float() end)
 -- map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
 -- vim.keymap.set('n', 'h', '<Up>', { noremap = true, silent = true }) -- Normal mode up arrow
 -- vim.keymap.set('n', 'k', '<Down>', { noremap = true, silent = true }) -- Normal mode down arrow
@@ -57,6 +56,8 @@ require('telescope').setup {
       '%.jpg',
       '%.png',
       '%.webp',
+      '%.pxo',
+      '%.uid',
       '%.pdf',
       '%.odt',
       '%.ico',
@@ -80,6 +81,4 @@ local function toggle_menu_fixed_height(height)
   end, 10)
 end
 
-vim.keymap.set('n', '<A-e>', function()
-  toggle_menu_fixed_height(10)
-end)
+vim.keymap.set('n', '<A-e>', function() toggle_menu_fixed_height(10) end)
