@@ -1,68 +1,36 @@
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'gdscript',
-  callback = function()
-    -- use spaces, etc.
-    -- vim.opt_local.expandtab = true
-    -- vim.opt_local.shiftwidth = 4
-    -- vim.opt_local.tabstop = 4
-    vim.keymap.set('i', '<CR>', function()
-      local line = vim.api.nvim_get_current_line()
+local function find_godot_project_root()
+  local cwd = vim.fn.getcwd()
+  local search_paths = { '', '/..' }
 
-      -- Trim leading spaces for detection
-      local trimmed = line:match '^%s*(.-)%s*$'
+  for _, relative_path in ipairs(search_paths) do
+    local project_file = cwd .. relative_path .. '/project.godot'
+    if vim.uv.fs_stat(project_file) then
+      return cwd .. relative_path
+    end
+  end
 
-      -- Match "if" at start, followed by anything, ending with ':'
-      -- if trimmed:match '^if%s+.-:$' or trimmed:match '^(func%s+.-:)$' then
-      if trimmed:match '^if%s+.-:$' then
-        return '<CR>\t'
-      else
-        return '<CR>'
-      end
-    end, { buffer = true, expr = true })
-  end,
-})
+  return nil
+end
 
--- return {
---   'Teatek/gdscript-extended-lsp.nvim',
---   ft = { 'gd', 'gdscript', 'gdscript3' },
---   dependencies = {
---     'neovim/nvim-lspconfig',
---   },
---   config = function()
---     -- If using blink.cmp for completion capabilities:
---     local capabilities = require('blink.cmp').get_lsp_capabilities()
---
---     -- Setup the GDScript Extended LSP
---     require('gdscript_extended_lsp').setup {
---       capabilities = capabilities,
---       settings = {
---         show_native_symbols = true,
---         show_help_in_completion = true,
---       },
---     }
---   end,
--- }
---
--- return {
---   'Teatek/gdscript-extended-lsp.nvim',
---   ft = { 'gd', 'gdscript', 'gdscript3' },
---   dependencies = {
---     'neovim/nvim-lspconfig',
---   },
---   config = function()
---     local capabilities = require('blink.cmp').get_lsp_capabilities()
---
---     require('gdscript_extended_lsp').setup {
---       capabilities = capabilities,
---       settings = {
---         show_native_symbols = true,
---         show_help_in_completion = true,
---       },
---       keymaps = {
---         declaration = 'gd', -- Keymap to go to definition
---         close = { 'q', '<Esc>' }, -- Keymap for closing the documentation
---       },
---     }
---     vim.keymap.set('n', 'gd', function() vim.lsp.buf.definition() end, { silent = true, noremap = true, desc = 'Go to definition (GDScript)' })
---   end,
--- }
+-- Function to check if server is already running
+local function is_server_running(project_path)
+  local server_pipe = project_path .. '/server.pipe'
+  return vim.uv.fs_stat(server_pipe) ~= nil
+end
+
+-- Function to start Godot server if needed
+local function start_godot_server_if_needed()
+  local godot_project_path = find_godot_project_root()
+
+  if godot_project_path and not is_server_running(godot_project_path) then
+    vim.fn.serverstart(godot_project_path .. '/server.pipe')
+    return true
+  end
+
+  return false
+end
+
+start_godot_server_if_needed()
+require('telescope').load_extension 'gdscript-extended-lsp'
+-- --server ./godothost --remote-send "<C-\><C-N>:n {file}<CR>{line}G{col}|"
+-- vim.keymap.set('n', '<leader>gL', function() require('gdscript-extended-lsp').request_doc_class 'Label' end)

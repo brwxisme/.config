@@ -46,7 +46,7 @@ Scope {
                 CurlyBox {
                     id: curly
                     totalHeight: container.implicitHeight + 64
-                    totalWidth: 18
+                    totalWidth: 20
                     // onLeft: true
                     onLeft: modelData.name == "HDMI-A-1"
 

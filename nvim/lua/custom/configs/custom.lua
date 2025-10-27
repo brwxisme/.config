@@ -20,11 +20,11 @@ for i = 1, 10 do
     end
 
     local path = vim.fn.expand(item.value)
-    local note = dbee.api.ui.editor_search_note_with_file('/home/brew/' .. path)
+    local note = dbee.api.ui.editor_search_note_with_file(path)
     if note and note.id then
       dbee.api.ui.editor_set_current_note(note.id)
     else
-      vim.notify('Note not found for ~/' .. path)
+      vim.notify('Note not found for ' .. path)
       -- vim.notify('Note not found for ~/' .. path .. note.id)
     end
   end, { desc = 'Open Harpoon file ' .. i .. ' in DBEE editor' })

@@ -4,7 +4,33 @@ else
   vim.cmd.colorscheme 'eldritch'
 end
 
-vim.lsp.enable { 'gdscript', 'gdshader_lsp', 'marksman' }
+-- local capabilities = require('blink.cmp').get_lsp_capabilities()
+vim.lsp.config('gdscript', {
+  -- cmd = { 'ncat', '127.0.0.1', '6005' }, -- Godot’s LSP endpoint
+  filetypes = { 'gd', 'gdscript' },
+  root_markers = { 'project.godot', '.git' },
+
+  -- Blink automatically manages capabilities
+  capabilities = vim.lsp.protocol.make_client_capabilities(),
+  -- capabilities = capabilities,
+
+  on_attach = function(client, bufnr)
+    -- Optional keymaps
+    local opts = { buffer = bufnr }
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
+  end,
+})
+
+vim.lsp.config('qmlls', {
+  cmd = { 'qmlls', '-E' },
+})
+vim.lsp.enable { 'gdscript', 'gdshader_lsp', 'marksman', 'qmlls' }
+-- vim.lsp.qmlls = {
+--   enable = true,
+--   cmd = { 'qmlls', '-E' },
+-- }
 vim.o.smartindent = true
 vim.o.relativenumber = true
 vim.o.expandtab = false
@@ -82,3 +108,5 @@ local function toggle_menu_fixed_height(height)
 end
 
 vim.keymap.set('n', '<A-e>', function() toggle_menu_fixed_height(10) end)
+
+vim.keymap.set('n', '<leader>e', function() vim.diagnostic.open_float(nil, { scope = 'cursor' }) end, { desc = 'Open diagnostic float at cursor' })

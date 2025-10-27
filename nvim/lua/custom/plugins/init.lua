@@ -47,8 +47,6 @@ return {
     enabled = true,
     keys = {
       { 's', mode = { 'n', 'x', 'o' }, desc = 'Leap Forward to' },
-      { 'S', mode = { 'n', 'x', 'o' }, desc = 'Leap Backward to' },
-      { 'gs', mode = { 'n', 'x', 'o' }, desc = 'Leap from Windows' },
     },
     config = function(_, opts)
       local leap = require 'leap'
@@ -60,37 +58,37 @@ return {
       vim.keymap.del({ 'x', 'o' }, 'X')
     end,
   },
-  -- {
-  --   'folke/noice.nvim',
-  --   event = 'VeryLazy',
-  --   opts = {
-  --
-  --     cmdline = {
-  --       enabled = true, -- enables the Noice cmdline UI
-  --       view = 'cmdline_popup', -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
-  --       opts = {}, -- global options for the cmdline. See section on views
-  --       ---@type table<string, CmdlineFormat>
-  --       format = {
-  --         -- conceal: (default=true) This will hide the text in the cmdline that matches the pattern.
-  --         -- view: (default is cmdline view)
-  --         -- opts: any options passed to the view
-  --         -- icon_hl_group: optional hl_group for the icon
-  --         -- title: set to anything or empty string to hide
-  --         cmdline = { pattern = '^:', icon = ':', lang = 'vim' },
-  --         -- add any options here
-  --         --
-  --       },
-  --     },
-  --   },
-  --   dependencies = {
-  --     -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-  --     'MunifTanjim/nui.nvim',
-  --     -- OPTIONAL:
-  --     --   `nvim-notify` is only needed, if you want to use the notification view.
-  --     --   If not available, we use `mini` as the fallback
-  --     'rcarriga/nvim-notify',
-  --   },
-  -- },
+  {
+    'folke/noice.nvim',
+    event = 'VeryLazy',
+    opts = {
+
+      cmdline = {
+        enabled = true, -- enables the Noice cmdline UI
+        view = 'cmdline', -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
+        opts = {}, -- global options for the cmdline. See section on views
+        ---@type table<string, CmdlineFormat>
+        format = {
+          -- conceal: (default=true) This will hide the text in the cmdline that matches the pattern.
+          -- view: (default is cmdline view)
+          -- opts: any options passed to the view
+          -- icon_hl_group: optional hl_group for the icon
+          -- title: set to anything or empty string to hide
+          cmdline = { pattern = '^:', icon = ':', lang = 'vim' },
+          -- add any options here
+          --
+        },
+      },
+    },
+    dependencies = {
+      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+      'MunifTanjim/nui.nvim',
+      -- OPTIONAL:
+      --   `nvim-notify` is only needed, if you want to use the notification view.
+      --   If not available, we use `mini` as the fallback
+      'rcarriga/nvim-notify',
+    },
+  },
   {
     'stevearc/oil.nvim',
     ---@module 'oil'
@@ -170,39 +168,9 @@ return {
           end
         end,
       },
-      -- keymaps = {
-      --   ['<CR>'] = function()
-      --     local oil = require 'oil'
-      --     local entry = oil.get_cursor_entry()
-      --     if not entry then
-      --       return
-      --     end
-      --
-      --     local name = entry.name
-      --     local path = oil.get_current_dir() .. name
-      --
-      --     -- if it's a directory, open it normally
-      --     local fs = vim.loop.fs_stat(path)
-      --     if fs and fs.type == 'directory' then
-      --       oil.select { vertical = false }
-      --       return
-      --     end
-      --
-      --     -- try to open using XDG (Linux) or 'open' (macOS)
-      --     local opener = vim.fn.has 'mac' == 1 and 'open' or 'xdg-open'
-      --     local ok = vim.fn.jobstart({ opener, path }, { detach = true })
-      --     if ok <= 0 then
-      --       print('❌ Failed to open file: ' .. path)
-      --     else
-      --       print('▶ Opened with system app: ' .. name)
-      --     end
-      --   end,
-      -- },
     },
     -- Optional dependencies
     dependencies = { { 'echasnovski/mini.icons', opts = {} } },
-    -- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
-    -- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
     lazy = false,
   },
   {
@@ -249,6 +217,7 @@ return {
     end,
     dependencies = { { 'nvim-tree/nvim-web-devicons' } },
   },
+
   {
     'eldritch-theme/eldritch.nvim',
     lazy = false,
@@ -272,6 +241,7 @@ return {
   { 'catppuccin/nvim', name = 'catppuccin', priority = 1000 },
   { 'rose-pine/neovim', name = 'rose-pine' },
   { 'rebelot/kanagawa.nvim', name = 'kanagawa' },
+
   {
     'Aasim-A/scrollEOF.nvim',
     event = { 'CursorMoved', 'WinScrolled' },
@@ -309,22 +279,7 @@ return {
       end
     end,
   },
-  { 'habamax/vim-godot', event = 'VimEnter' },
-  -- { 'teatek/gdscript-extended-lsp.nvim', opts = {} },
-  -- {
-  --   'teatek/gdscript-extended-lsp.nvim',
-  --   opts = {
-  --     doc_file_extension = '.txt', -- Documentation file extension (can allow a better search in buffers list with telescope)
-  --     view_type = 'floating', -- Options : "current", "split", "vsplit", "tab", "floating"
-  --     split_side = false, -- (For split and vsplit only) Open on the right or top on false and on the left or bottom on true
-  --     keymaps = {
-  --       declaration = 'gd', -- Keymap to go to definition
-  --       close = { 'q', '<Esc>' }, -- Keymap for closing the documentation
-  --     },
-  --     floating_win_size = 0.8, -- Floating window size
-  --     picker = 'snackes', -- Options : "telescope", "snacks"
-  --   },
-  -- },
+
   {
     'kndndrj/nvim-dbee',
     dependencies = {
@@ -340,23 +295,6 @@ return {
       require('dbee').setup(--[[optional config]])
     end,
   },
-  -- {
-  --   'OXY2DEV/markview.nvim',
-  --   lazy = false,
-  --
-  --   -- config = function()
-  --   --   require('markview').setup()
-  --   --   preview = {
-  --   --
-  --   --     icon_provider = 'mini',
-  --   --   }
-  --   -- end,
-  --   -- For blink.cmp's completion
-  --   -- source
-  --   -- dependencies = {
-  --   --     "saghen/blink.cmp"
-  --   -- },
-  -- },
   {
     'MeanderingProgrammer/render-markdown.nvim',
     dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-mini/mini.nvim' }, -- if you use the mini.nvim suite
@@ -365,5 +303,20 @@ return {
     ---@module 'render-markdown'
     ---@type render.md.UserConfig
     opts = {},
+  },
+
+  { 'habamax/vim-godot', event = 'VimEnter' },
+  {
+    'Teatek/gdscript-extended-lsp.nvim',
+    opts = {
+      keymaps = {
+        declaration = 'gM', -- Keymap to go to definition
+        close = { 'q', '<Esc>' }, -- Keymap for closing the documentation
+      },
+      doc_file_extension = '.txt',
+      view_type = 'floating',
+      picker = 'telescope',
+      -- etc.
+    },
   },
 }

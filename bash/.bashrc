@@ -10,7 +10,7 @@ alias ls="lsd"
 alias nv="nvim"
 alias nvrc="sh -c 'cd ~/.config/nvim && nvim'"
 alias oi="nvim -c 'Oil'"
-alias db="nvim -c 'Dbee' -u '~/.config/nvim/lua/custom/configs/custom.lua'"
+# alias db="sh -c 'cd ~/dbee' && nvim -c 'Dbee' -u '~/.config/nvim/lua/custom/configs/custom.lua'"
 alias nt="kitty @ set-font-size 12 && sh -c 'cd /home/brew/Notes && nvim +\"colorscheme rose-pine-moon\"'"
 # alias nt=""
 alias dlph="yt-dlp -f 720p "
@@ -37,6 +37,7 @@ alias tbp="cd /home/brew/SharedHDD/GodotProjects/TurnBasePlatform/"
 alias axf="cd /home/brew/SharedHDD/GodotProjects/newAxes/axesfull-godot"
 alias landing_page="cd /home/brew/Documents/LandingPage/"
 alias steady="cd $HOME/Documents/SteadyHaven/"
+alias oddpl="cd $HOME/Documents/Player-Controller/"
 # alias steady="~/Config_BRWXISME/tmux/steady_session.sh"
 alias fctry="cd /home/brew/Documents/newfactory/"
 alias marble="cd /home/brew/Documents/marble/MarbleMadness/"
@@ -95,3 +96,11 @@ function start_tmux(){
 	fi
 }
 export -f start_tmux
+
+
+function db(){
+	cd ~/dbee/
+	nvim -c 'Dbee' -u '~/.config/nvim/lua/custom/configs/custom.lua'
+# alias db="sh -c 'cd ~/dbee' && nvim -c 'Dbee' -u '~/.config/nvim/lua/custom/configs/custom.lua'"
+}
+export -f db
