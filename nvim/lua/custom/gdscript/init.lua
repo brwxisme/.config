@@ -33,4 +33,3 @@ end
 start_godot_server_if_needed()
 require('telescope').load_extension 'gdscript-extended-lsp'
 -- --server ./godothost --remote-send "<C-\><C-N>:n {file}<CR>{line}G{col}|"
--- vim.keymap.set('n', '<leader>gL', function() require('gdscript-extended-lsp').request_doc_class 'Label' end)
