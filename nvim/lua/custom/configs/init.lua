@@ -12,6 +12,9 @@ vim.o.shiftwidth = 0
 vim.o.pumheight = 10
 vim.o.pumblend = 25
 vim.o.scrolloff = 35
+
+vim.o.swapfile = false
+
 vim.diagnostic.config {
   virtual_text = true,
 }

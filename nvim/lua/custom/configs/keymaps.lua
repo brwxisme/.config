@@ -1,4 +1,4 @@
-vim.keymap.set('i', 'll', '<Esc>', { noremap = false })
+vim.keymap.set('i', 'jj', '<Esc>', { noremap = false })
 
 vim.keymap.set('n', '<C-e>', function() require('oil').toggle_float() end)
 vim.keymap.set('n', '<Esc>', function()
@@ -28,3 +28,4 @@ end
 vim.keymap.set('n', '<A-e>', function() toggle_menu_fixed_height(10) end)
 
 vim.keymap.set('n', '<leader>e', function() vim.diagnostic.open_float(nil, { scope = 'cursor' }) end, { desc = 'Open diagnostic float at cursor' })
+vim.keymap.set('n', '<leader>u', function() require('noice').cmd 'dismiss' end)
