@@ -16,7 +16,7 @@ return {
         highlights.Type.fg = '#03f9de'
       end,
       dim_inactive = true,
-      -- transparent = true,
+      transparent = true,
     },
   },
   { 'ellisonleao/gruvbox.nvim', priority = 1000, config = true, opts = ... },

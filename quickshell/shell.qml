@@ -30,4 +30,8 @@ ShellRoot {
     // }
     // ModeOne {}
     ModeTwo {}
+    Shortcut {
+        sequence: "Super+C"
+        onActivated: console.log("Super pressed")
+    }
 }

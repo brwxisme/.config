@@ -28,7 +28,8 @@ return {
   },
   keys = {
     -- Basic debugging keymaps, feel free to change to your liking!
-    { '<F5>', function() require('dap').continue() end, desc = 'Debug: Start/Continue' },
+    -- { '<F5>', function() require('dap').continue() end, desc = 'Debug: Start/Continue' },
+    { '<F6>', function() require('dap').continue() end, desc = 'Debug: Start/Continue' },
     { '<F1>', function() require('dap').step_into() end, desc = 'Debug: Step Into' },
     { '<F2>', function() require('dap').step_over() end, desc = 'Debug: Step Over' },
     { '<F3>', function() require('dap').step_out() end, desc = 'Debug: Step Out' },
@@ -115,7 +116,8 @@ return {
       -- online, please don't ask me how to install them :)
       ensure_installed = {
         -- Update this to ensure that you have the debuggers for the langs you want
-        'delve',
+        'gdscript',
+        -- 'delve',
       },
     }
 
@@ -155,10 +157,26 @@ return {
     --   vim.fn.sign_define(tp, { text = icon, texthl = hl, numhl = hl })
     -- end
 
-    dap.listeners.after.event_initialized['dapui_config'] = dapui.open
+    -- dap.listeners.after.event_initialized['dapui_config'] = dapui.open
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
+    -- local dap = require 'dap'
 
+    dap.adapters.godot = {
+      type = 'server',
+      host = '127.0.0.1',
+      port = 6006,
+    }
+
+    dap.configurations.gdscript = {
+      {
+        type = 'godot',
+        request = 'launch',
+        name = 'Launch scene',
+        project = '${workspaceFolder}', -- Points to your Godot project root
+        launch_scene = true, -- Launches the current scene
+      },
+    }
     -- Install golang specific config
     require('dap-go').setup {
       delve = {

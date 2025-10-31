@@ -16,16 +16,8 @@ return {
 
     -- For blink.cmp's completion
     -- source
-    opts = {
-      preview = {
-        icon_provider = 'mini', -- "mini" or "devicons"
-      },
-    },
     dependencies = {
       'saghen/blink.cmp',
     },
   },
-  { 'opdavies/toggle-checkbox.nvim', keys = {
-    { '<leader>tt', function() require('toggle-checkbox').toggle() end, desc = 'Debug: Start/Continue' },
-  } },
 }

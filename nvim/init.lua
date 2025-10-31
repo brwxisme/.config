@@ -932,6 +932,7 @@ require('lazy').setup({
             enabled = function()
               -- Filetypes for which buffer completions are enabled; add filetypes to extend:
               local enabled_filetypes = {
+                'sql',
                 'markdown',
                 'text',
               }
@@ -1043,7 +1044,7 @@ require('lazy').setup({
     ---@type TSConfig
     ---@diagnostic disable-next-line: missing-fields
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
+      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'sql' },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
@@ -1072,10 +1073,10 @@ require('lazy').setup({
   --  Here are some example plugins that I've included in the Kickstart repository.
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   --
-  -- require 'kickstart.plugins.debug',
+  require 'kickstart.plugins.debug',
   -- require 'kickstart.plugins.indent_line',
   -- require 'kickstart.plugins.lint',
-  require 'kickstart.plugins.autopairs',
+  -- require 'kickstart.plugins.autopairs',
   -- require 'kickstart.plugins.neo-tree',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
@@ -1111,9 +1112,11 @@ require('lazy').setup({
   },
 })
 
+require 'custom.configs.autocmds'
 require 'custom.configs'
 require 'custom.configs.keymaps'
 require 'custom.configs.lsp'
-require 'custom.gdscript'
+require 'custom.configs.godot'
+-- require 'custom.gdscript'
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

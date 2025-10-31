@@ -2,7 +2,7 @@ dofile(vim.fn.stdpath 'config' .. '/init.lua')
 
 -- Then override or extend settings here:
 vim.o.number = true
-vim.cmd.colorscheme 'kanagawa-wave'
+vim.cmd.colorscheme 'tokyonight'
 vim.keymap.set('n', '<C-t>', function() vim.api.nvim_set_current_win(1003) end)
 vim.keymap.set('n', '<C-e>', function() vim.api.nvim_set_current_win(1000) end)
 vim.keymap.set('n', '<C-s>', function() vim.api.nvim_set_current_win(1002) end)

@@ -19,27 +19,7 @@ vim.lsp.config('gdscript', {
 vim.lsp.config('qmlls', {
   cmd = { 'qmlls', '-E' },
 })
-vim.lsp.config('postgres_lsp', {
-  cmd = { 'postgres-language-server', 'lsp-proxy' },
-  filetypes = { 'sql' }, -- Add this line
-  root_dir = '', -- works anywhere
-  single_file_support = true,
-  -- capabilities = (function()
-  --   local base = vim.lsp.protocol.make_client_capabilities()
-  --   local blink_caps = require('blink.cmp').get_lsp_capabilities()
-  --   return vim.tbl_deep_extend('force', base, blink_caps)
-  -- end)(),
-  settings = {
-    postgres_lsp = {
-      connections = {
-        {
-          connection_string = 'postgresql://postgres:postgres@127.0.0.1:54322/postgres?sslmode=disable',
-        },
-      },
-    },
-  },
-})
-vim.lsp.enable { 'gdscript', 'gdshader_lsp', 'marksman', 'qmlls', 'postgres_lsp' }
+vim.lsp.enable { 'gdscript', 'gdshader_lsp', 'marksman', 'qmlls' }
 -- vim.lsp.qmlls = {
 --   enable = true,
 --   cmd = { 'qmlls', '-E' },
