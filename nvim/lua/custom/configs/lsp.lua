@@ -4,8 +4,9 @@ vim.lsp.config('gdscript', {
   root_markers = { 'project.godot', '.git' },
 
   -- Blink automatically manages capabilities
-  capabilities = vim.lsp.protocol.make_client_capabilities(),
-  -- capabilities = capabilities,
+  -- capabilities = vim.lsp.protocol.make_client_capabilities(),
+
+  capabilities = require('blink.cmp').get_lsp_capabilities(),
 
   on_attach = function(client, bufnr)
     -- Optional keymaps

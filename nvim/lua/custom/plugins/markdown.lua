@@ -18,7 +18,25 @@ return {
     -- source
     opts = {
       preview = {
-        icon_provider = 'mini', -- "mini" or "devicons"
+        icon_provider = 'internal', -- "mini" or "devicons"
+      },
+      block_quotes = {
+        enable = true,
+        wrap = true,
+        ['HINT'] = {
+          hl = 'MarkviewBlockQuoteOk',
+          preview = ' Hint',
+
+          title = true,
+          icon = '',
+        },
+        ['TODO'] = {
+          hl = 'MarkviewBlockQuoteNote',
+          preview = ' Todo',
+
+          title = true,
+          icon = ' ',
+        },
       },
     },
     dependencies = {

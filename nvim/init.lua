@@ -696,11 +696,11 @@ require('lazy').setup({
       -- https://github.com/Saghen/blink.cmp/blob/102db2f5996a46818661845cf283484870b60450/plugin/blink-cmp.lua
       -- It has been left here as a comment for educational purposes (as the predecessor completion plugin required this explicit step).
       --
-      -- local capabilities = require('blink.cmp').get_lsp_capabilities()
+      local capabilities = require('blink.cmp').get_lsp_capabilities()
 
-      -- vim.lsp.config.gdscript.setup {
-      --   capabilities = capabilities,
-      -- }
+      vim.lsp.config('gdscript', {
+        capabilities = capabilities,
+      })
 
       -- Language servers can broadly be installed in the following ways:
       --  1) via the mason package manager; or
