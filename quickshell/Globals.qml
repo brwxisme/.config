@@ -15,6 +15,8 @@ Singleton {
     signal showOnEmptyWorkspace
     signal changeBackground
     signal showBar(val: string)
+    signal modPressed(val: string)
+    signal modReleased(val: string)
 
     property var monitor_workspace_window_count
     property var monitors: {
@@ -153,6 +155,17 @@ Singleton {
             if (root.showingBar) {
                 root.toggleBar();
             }
+        }
+    }
+
+    function keypressed_from_socket(message: string) {
+        var x = JSON.parse(message);
+        console.log(x.key);
+        console.log(x.pressed);
+        if (x.pressed == "true") {
+            root.modPressed(x.key);
+        } else {
+            root.modReleased(x.key);
         }
     }
 }

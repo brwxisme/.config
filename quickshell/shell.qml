@@ -1,11 +1,13 @@
 //@ pragma UseQApplication
 //@ pragma IconTheme Flatery-Indigo-Dark
 import Quickshell
+import Quickshell.Io
 import QtQuick
 import "OSDs" as OSD
 import "VerticalWorkspace"
 import "ModeTwo"
 import "ModeOne"
+import "Sockets"
 
 ShellRoot {
     // Background {}
@@ -29,9 +31,45 @@ ShellRoot {
     //     }
     // }
     // ModeOne {}
+    Socket {}
     ModeTwo {}
-    Shortcut {
-        sequence: "Super+C"
-        onActivated: console.log("Super pressed")
+    Process {
+        id: run_mod_keys
+        running: false
+        command: ["sh", "-c", "pkill ModKey"]
+        stdout: StdioCollector {
+            onStreamFinished: {
+                console.log("Mod Key Result", text);
+            }
+        }
+        onExited: {
+            run_mod_keys_x.running = true;
+        }
+    }
+    Process {
+        id: run_mod_keys_x
+
+        command: ["sh", "/home/brew/Config_BRWXISME/ModKey/run.sh"]
+
+        running: true
+        stdout: StdioCollector {
+            onStreamFinished: console.log("ModKey output:", text)
+        }
+        stderr: StdioCollector {
+            onStreamFinished: console.warn("ModKey error:", text)
+        }
+        onExited: console.warn("ModKey exited with code:", exitCode)
+    }
+    // Component.onCompleted: startAfterDelay.start()
+
+    Timer {
+        id: startAfterDelay
+        interval: 1000       // 1000 ms = 1 second
+        running: false
+
+        repeat: false
+        onTriggered: {
+            run_mod_keys.running = true;
+        }
     }
 }
