@@ -18,6 +18,8 @@ Scope {
                 id: pnl
                 screen: modelData
 
+                WlrLayershell.layer: WlrLayer.Top
+                WlrLayershell.exclusionMode: ExclusionMode.Ignore
                 property HyprlandMonitor myMonitor: Hyprland.monitorFor(screen)
                 property HyprlandWorkspace myWorkspace: myMonitor.activeWorkspace
                 property bool monitor_focus: myMonitor.focused
