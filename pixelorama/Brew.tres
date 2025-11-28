@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ShortcutProfile" load_steps=275 format=3]
+[gd_resource type="Resource" script_class="ShortcutProfile" load_steps=282 format=3]
 
 [ext_resource type="Script" path="res://addons/keychain/ShortcutProfile.gd" id="1"]
 
@@ -1125,6 +1125,33 @@ keycode = 45
 [sub_resource type="InputEventKey" id="InputEventKey_te5wf"]
 keycode = 4194435
 
+[sub_resource type="InputEventKey" id="InputEventKey_e0o2s"]
+ctrl_pressed = true
+keycode = 77
+unicode = 77
+
+[sub_resource type="InputEventKey" id="InputEventKey_5qi75"]
+command_or_control_autoremap = true
+keycode = 4194319
+
+[sub_resource type="InputEventKey" id="InputEventKey_4i7vn"]
+alt_pressed = true
+keycode = 4194319
+
+[sub_resource type="InputEventKey" id="InputEventKey_byxsw"]
+command_or_control_autoremap = true
+keycode = 4194321
+
+[sub_resource type="InputEventKey" id="InputEventKey_f68rs"]
+alt_pressed = true
+keycode = 4194321
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_d0jwy"]
+button_index = 2
+
+[sub_resource type="InputEventKey" id="InputEventKey_rn6d3"]
+keycode = 4194312
+
 [resource]
 script = ExtResource("1")
 name = "Brew"
@@ -1159,6 +1186,8 @@ bindings = {
 &"cut": Array[InputEvent]([SubResource("InputEventKey_h6m8j")]),
 &"delete": Array[InputEvent]([SubResource("InputEventKey_3wn5i")]),
 &"desaturation": Array[InputEvent]([]),
+&"diagonal_x_minus_y_mirror": Array[InputEvent]([]),
+&"diagonal_xy_mirror": Array[InputEvent]([]),
 &"display_layer_effects": Array[InputEvent]([]),
 &"draw_color_picker": Array[InputEvent]([SubResource("InputEventKey_i5ag4")]),
 &"draw_create_line": Array[InputEvent]([SubResource("InputEventKey_lqd1w")]),
@@ -1317,7 +1346,9 @@ bindings = {
 &"transformation_cancel": Array[InputEvent]([SubResource("InputEventKey_k85ca")]),
 &"transformation_confirm": Array[InputEvent]([SubResource("InputEventKey_nuaij"), SubResource("InputEventKey_0jfkj")]),
 &"ui_accept": Array[InputEvent]([SubResource("InputEventKey_84kde"), SubResource("InputEventKey_awd32"), SubResource("InputEventKey_tr7qb")]),
+&"ui_accessibility_drag_and_drop": Array[InputEvent]([]),
 &"ui_cancel": Array[InputEvent]([SubResource("InputEventKey_c7vej")]),
+&"ui_colorpicker_delete_preset": Array[InputEvent]([SubResource("InputEventJoypadButton_d0jwy"), SubResource("InputEventKey_rn6d3")]),
 &"ui_copy": Array[InputEvent]([SubResource("InputEventKey_l488j"), SubResource("InputEventKey_m4c2r")]),
 &"ui_cut": Array[InputEvent]([SubResource("InputEventKey_etfsh"), SubResource("InputEventKey_lkl8u")]),
 &"ui_down": Array[InputEvent]([SubResource("InputEventKey_1mpu6"), SubResource("InputEventJoypadButton_60b3d"), SubResource("InputEventJoypadMotion_godwy")]),
@@ -1325,10 +1356,15 @@ bindings = {
 &"ui_filedialog_refresh": Array[InputEvent]([SubResource("InputEventKey_t3w86")]),
 &"ui_filedialog_show_hidden": Array[InputEvent]([SubResource("InputEventKey_5v581")]),
 &"ui_filedialog_up_one_level": Array[InputEvent]([SubResource("InputEventKey_fxdxv")]),
+&"ui_focus_mode": Array[InputEvent]([SubResource("InputEventKey_e0o2s")]),
 &"ui_focus_next": Array[InputEvent]([SubResource("InputEventKey_26wau")]),
 &"ui_focus_prev": Array[InputEvent]([SubResource("InputEventKey_vt8tl")]),
 &"ui_graph_delete": Array[InputEvent]([SubResource("InputEventKey_am7e6")]),
 &"ui_graph_duplicate": Array[InputEvent]([SubResource("InputEventKey_fqqus")]),
+&"ui_graph_follow_left": Array[InputEvent]([SubResource("InputEventKey_5qi75")]),
+&"ui_graph_follow_left.macos": Array[InputEvent]([SubResource("InputEventKey_4i7vn")]),
+&"ui_graph_follow_right": Array[InputEvent]([SubResource("InputEventKey_byxsw")]),
+&"ui_graph_follow_right.macos": Array[InputEvent]([SubResource("InputEventKey_f68rs")]),
 &"ui_home": Array[InputEvent]([SubResource("InputEventKey_fjjpa")]),
 &"ui_left": Array[InputEvent]([SubResource("InputEventKey_jgh2a"), SubResource("InputEventJoypadButton_n33ub"), SubResource("InputEventJoypadMotion_l5sjo")]),
 &"ui_menu": Array[InputEvent]([SubResource("InputEventKey_tinim")]),
@@ -1395,6 +1431,7 @@ bindings = {
 &"ui_unicode_start": Array[InputEvent]([SubResource("InputEventKey_hdu68")]),
 &"ui_up": Array[InputEvent]([SubResource("InputEventKey_1a30n"), SubResource("InputEventJoypadButton_rs68q"), SubResource("InputEventJoypadMotion_0vi0k")]),
 &"undo": Array[InputEvent]([SubResource("InputEventKey_tog5b"), SubResource("InputEventMouseButton_j8cm7")]),
+&"undo_history": Array[InputEvent]([]),
 &"vertical_mirror": Array[InputEvent]([]),
 &"view_splash_screen": Array[InputEvent]([]),
 &"zen_mode": Array[InputEvent]([SubResource("InputEventKey_n6kk5")]),

@@ -1,12 +1,13 @@
 lastupdatecheck: 1758296686
 recentrepos:
+    - /home/brew/Documents/Player-Controller
+    - /home/brew/Documents/marble
+    - /home/brew/Documents/AoK
     - /home/brew/Documents/SteadyHaven
     - /home/brew/Notes
-    - /home/brew/Documents/AoK
     - /home/brew/Config_BRWXISME
-    - /home/brew/Documents/Player-Controller
 startuppopupversion: 5
-lastversion: 0.51.1
+lastversion: 0.53.0
 customcommandshistory:
     - q
 hidecommandlog: false
