@@ -2,7 +2,7 @@ import QtQuick
 import Quickshell.Services.Pipewire
 import QtQuick.Layouts
 import Quickshell
-import Qt5Compat.GraphicalEffects
+// import Qt5Compat.GraphicalEffects
 import ".."
 
 Rectangle {

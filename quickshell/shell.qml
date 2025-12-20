@@ -8,6 +8,8 @@ import "VerticalWorkspace"
 import "ModeTwo"
 import "ModeOne"
 import "Sockets"
+import "OffsetCrosshair"
+import "WindowIndicator"
 
 ShellRoot {
     // Background {}
@@ -60,6 +62,8 @@ ShellRoot {
         }
         onExited: console.warn("ModKey exited with code:", exitCode)
     }
+    Crosshair {}
+
     // Component.onCompleted: startAfterDelay.start()
 
     Timer {
@@ -72,4 +76,5 @@ ShellRoot {
             run_mod_keys.running = true;
         }
     }
+    WindowIndicator {}
 }

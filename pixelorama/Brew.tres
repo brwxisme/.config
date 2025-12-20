@@ -699,6 +699,12 @@ unicode = 32
 [sub_resource type="InputEventKey" id="InputEventKey_c7vej"]
 keycode = 4194305
 
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_d0jwy"]
+button_index = 2
+
+[sub_resource type="InputEventKey" id="InputEventKey_rn6d3"]
+keycode = 4194312
+
 [sub_resource type="InputEventKey" id="InputEventKey_l488j"]
 command_or_control_autoremap = true
 keycode = 67
@@ -740,6 +746,11 @@ unicode = 72
 [sub_resource type="InputEventKey" id="InputEventKey_fxdxv"]
 keycode = 4194308
 
+[sub_resource type="InputEventKey" id="InputEventKey_e0o2s"]
+ctrl_pressed = true
+keycode = 77
+unicode = 77
+
 [sub_resource type="InputEventKey" id="InputEventKey_26wau"]
 keycode = 4194306
 
@@ -754,6 +765,22 @@ keycode = 4194312
 command_or_control_autoremap = true
 keycode = 68
 unicode = 68
+
+[sub_resource type="InputEventKey" id="InputEventKey_5qi75"]
+command_or_control_autoremap = true
+keycode = 4194319
+
+[sub_resource type="InputEventKey" id="InputEventKey_4i7vn"]
+alt_pressed = true
+keycode = 4194319
+
+[sub_resource type="InputEventKey" id="InputEventKey_byxsw"]
+command_or_control_autoremap = true
+keycode = 4194321
+
+[sub_resource type="InputEventKey" id="InputEventKey_f68rs"]
+alt_pressed = true
+keycode = 4194321
 
 [sub_resource type="InputEventKey" id="InputEventKey_fjjpa"]
 keycode = 4194317
@@ -1124,33 +1151,6 @@ keycode = 45
 
 [sub_resource type="InputEventKey" id="InputEventKey_te5wf"]
 keycode = 4194435
-
-[sub_resource type="InputEventKey" id="InputEventKey_e0o2s"]
-ctrl_pressed = true
-keycode = 77
-unicode = 77
-
-[sub_resource type="InputEventKey" id="InputEventKey_5qi75"]
-command_or_control_autoremap = true
-keycode = 4194319
-
-[sub_resource type="InputEventKey" id="InputEventKey_4i7vn"]
-alt_pressed = true
-keycode = 4194319
-
-[sub_resource type="InputEventKey" id="InputEventKey_byxsw"]
-command_or_control_autoremap = true
-keycode = 4194321
-
-[sub_resource type="InputEventKey" id="InputEventKey_f68rs"]
-alt_pressed = true
-keycode = 4194321
-
-[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_d0jwy"]
-button_index = 2
-
-[sub_resource type="InputEventKey" id="InputEventKey_rn6d3"]
-keycode = 4194312
 
 [resource]
 script = ExtResource("1")

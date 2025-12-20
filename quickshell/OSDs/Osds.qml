@@ -14,7 +14,8 @@ Scope {
         id: caposd
     }
     NewAudioOSD {}
-    ModKeyOSD {}
+    // ModKeyOSD {}
+    ModKeyOSDBarMode {}
     Process {
         id: checkCaps
         // command: ["cat", "/sys/class/leds/input*::capslock/brightness"]

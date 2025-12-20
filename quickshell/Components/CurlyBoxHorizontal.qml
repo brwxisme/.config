@@ -13,6 +13,7 @@ Shape {
     property int totalHeight: 50
     property int usableWidth: totalWidth - (totalHeight * 2)
     property int edgeSize: totalHeight / 2
+    property string bgColor: MyColor.bg
     property bool inverted: false
     onInvertedChanged: {
         onBot = !onBot;
@@ -26,7 +27,7 @@ Shape {
     ShapePath {
         strokeWidth: 2
         strokeColor: r.borderColor
-        fillColor: MyColor.bg // Optional: for filling the shape
+        fillColor: r.bgColor // Optional: for filling the shape
 
         // Define the starting point of the path
         startX: 0

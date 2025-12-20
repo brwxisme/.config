@@ -80,6 +80,7 @@ Scope {
                             //     command: ["hyprpicker", "-a"]
                             // }
                             HyprPicker {}
+                            CrosshairToggle {}
                             BackgroundButton {}
                             IconButton {
                                 icon: ""

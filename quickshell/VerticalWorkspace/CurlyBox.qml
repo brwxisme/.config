@@ -1,4 +1,4 @@
-import Qt5Compat.GraphicalEffects
+// import Qt5Compat.GraphicalEffects
 import QtQuick.Shapes 1.9
 import QtQuick
 // import Quickshell

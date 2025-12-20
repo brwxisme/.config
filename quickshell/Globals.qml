@@ -11,6 +11,7 @@ Singleton {
 
     signal showWorkspaces
     signal hideWorkspaces
+    signal activeWindowChanged
     signal windowKilled
     signal showOnEmptyWorkspace
     signal changeBackground
@@ -31,6 +32,8 @@ Singleton {
 
     property string time
     property string date
+    property bool showCrosshair: false
+
     //
     // property var window_count: ({})
     Item {
@@ -41,10 +44,13 @@ Singleton {
             // function onFocusedWorkspaceChanged(lalal: HyprlandWorkspace) {
             function onRawEvent(event: HyprlandEvent): void {
                 // function onFocusedMonitorChanged(lala: HyprlandMonitor): void {
-                // console.log("NEW EVENT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                // console.log(event.name);
+                console.log("NEW EVENT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                console.log(event.name);
                 const e_name = event.name;
                 const show = e_name.includes("workspace") || e_name.includes("mon");
+                if (e_name.includes("activewindowv2")){
+                    Globals.activeWindowChanged();
+                }
                 if (show) {
                     cmd_test.running = true;
                 } else if (e_name.includes("openwindow")) {
@@ -68,7 +74,7 @@ Singleton {
             onStreamFinished: {
                 // root.time = this.text;
                 var x = JSON.parse(text);
-                // console.log(x.windows);
+                console.log(x);
                 Globals.monitors[x.monitor] = x.windows != 0;
                 Globals.monitor_workspace_window_count = x.windows;
                 root.window_count[x.monitor] = x.windows;

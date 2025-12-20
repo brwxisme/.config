@@ -698,9 +698,9 @@ require('lazy').setup({
       --
       local capabilities = require('blink.cmp').get_lsp_capabilities()
 
-      vim.lsp.config('gdscript', {
-        capabilities = capabilities,
-      })
+      -- vim.lsp.config('gdscript', {
+      --   capabilities = capabilities,
+      -- })
 
       -- Language servers can broadly be installed in the following ways:
       --  1) via the mason package manager; or

@@ -1,20 +1,14 @@
 lastupdatecheck: 1758296686
 recentrepos:
-    - /home/brew/Documents/Player-Controller
-    - /home/brew/Documents/marble
-    - /home/brew/Documents/AoK
-    - /home/brew/Documents/SteadyHaven
-    - /home/brew/Notes
     - /home/brew/Config_BRWXISME
+    - /home/brew/Documents/marble
+    - /home/brew/Documents/SteadyHaven
+    - /home/brew/Documents/AoK
+    - /home/brew/Documents/Player-Controller
+    - /home/brew/Notes
 startuppopupversion: 5
-lastversion: 0.53.0
+didshowhunkstaginghint: false
+lastversion: 0.56.0
 customcommandshistory:
     - q
 hidecommandlog: false
-ignorewhitespaceindiffview: false
-diffcontextsize: 3
-renamesimilaritythreshold: 50
-localbranchsortorder: recency
-remotebranchsortorder: alphabetical
-gitlogorder: topo-order
-gitlogshowgraph: always
