@@ -1,4 +1,5 @@
-dofile(vim.fn.stdpath 'config' .. '/init.lua')
+-- dofile(vim.fn.stdpath 'config' .. '/init.lua')
+dofile '/home/brew/.config/nvim/init.lua'
 
 -- Then override or extend settings here:
 vim.o.number = true

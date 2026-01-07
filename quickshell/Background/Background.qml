@@ -5,6 +5,7 @@ import Quickshell
 import Quickshell.Wayland
 import Quickshell
 import QtQuick
+import ".."
 
 Scope {
     id: root
@@ -13,11 +14,15 @@ Scope {
     property list<string> bg_list
     property string sources: "/home/brew/Pictures/Quickshell/"
     property string current_img
+    property int frame_size: 10
+    property string frame_clr: "black"
+
     // WlrLayershell.namespace: "quickshell:bg"
     Variants {
         model: Quickshell.screens
         // model: Hyprlan.monitors
         Item {
+            id: itm
             required property var modelData
 
             PanelWindow {
@@ -45,14 +50,59 @@ Scope {
                     Image {
                         id: bg_image
 
-                        anchors.centerIn: parent
-                        // anchors.fill: parent
-                        mipmap: true
                         source: "/home/brew/Pictures/Quickshell/HDMI-A-1/EldritchLogo.png"
-                        // source: "/home/brew/Downloads/lorenzo-lanfranconi-jumpstart-1.jpg"
+                        mipmap: true
+
+                        anchors.centerIn: parent
+
+                        readonly property bool tooBig: implicitHeight > itm.modelData.height
+
+                        height: tooBig ? itm.modelData.height : implicitHeight
+                        width: implicitWidth * (height / implicitHeight)
+
                         fillMode: Image.PreserveAspectFit
+                        // readonly property bool tooBig: implicitWidth > itm.modelData.width || implicitHeight > itm.modelData.height
+                        //
+                        // width: tooBig ? itm.modelData.width : implicitWidth
+                        // height: tooBig ? itm.modelData.height : implicitHeight
+                        //
+                        // fillMode: tooBig ? Image.PreserveAspectFit : Image.Pad
                     }
+                    // Image {
+                    //     id: bg_image
+                    //     width: itm.modelData.width
+                    //     height: itm.modelData.height
+                    //
+                    //     anchors.centerIn: parent
+                    //     // anchors.fill: parent
+                    //     mipmap: true
+                    //     source: "/home/brew/Pictures/Quickshell/HDMI-A-1/EldritchLogo.png"
+                    //     // source: "/home/brew/Downloads/lorenzo-lanfranconi-jumpstart-1.jpg"
+                    //     fillMode: Image.PreserveAspectFit
+                    // }
                 }
+                // FrameCorner {
+                //     size: root.frame_size
+                //     clr: root.frame_clr
+                //     is_left: true
+                // }
+                // FrameCorner {
+                //     size: root.frame_size
+                //     clr: root.frame_clr
+                //     is_left: false
+                // }
+                // FrameCorner {
+                //     size: root.frame_size
+                //     clr: root.frame_clr
+                //     is_left: true
+                //     is_top: false
+                // }
+                // FrameCorner {
+                //     size: root.frame_size
+                //     clr: root.frame_clr
+                //     is_left: false
+                //     is_top: false
+                // }
                 Connections {
                     target: Globals
 

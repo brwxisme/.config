@@ -6,9 +6,11 @@ import ".."
 import "../OSDs" as OSD
 import "../VerticalWorkspace"
 import "../Components"
+import "../Background/"
 
 ShellRoot {
     Background {}
+    BackgroundFrame {}
     // ClockBackground {}
     OSD.Osds {
         id: osds

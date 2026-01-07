@@ -65,10 +65,16 @@ Scope {
                 mask: Region {}
                 Connections {
                     target: Globals
-                    // showWorkspaces
-                    // function onActiveWindowChanged(value: string): void {
+                    // function onActiveWindowChanged(): void {
+                    //     if (Globals.window_count[myMonitor.name] <= 1) {
+                    //         return;
+                    //     }
+                    //     get_pos.running = true;
+                    // }
                     function onShowWorkspaces(value: string): void {
-                        // console.log(Wayland.pointer.x, Wayland.pointer.y)
+                        if (Globals.window_count[myMonitor.name] <= 1) {
+                            return;
+                        }
                         get_pos.running = true;
                     }
                 }
@@ -81,12 +87,12 @@ Scope {
                         screen_w = pnl.screen.width;
                         screen_h = pnl.screen.height;
                     }
-                    function onVisibleChanged(): void {
-                        // root.
-                        // root.get_pos.running = true
-                        console.log("updating_pos");
+                    // function onVisibleChanged(): void {
+                    // root.
+                    // root.get_pos.running = true
+                    // console.log("updating_pos");
                     // auto_hide.running = true;
-                    }
+                    // }
                 }
                 Timer {
                     id: auto_hide
@@ -105,6 +111,7 @@ Scope {
                     running: false
 
                     stdout: StdioCollector {
+
                         onStreamFinished: {
                             //.pnl.time = this.text;
                             var txt = JSON.parse(text);
@@ -170,6 +177,13 @@ Scope {
                     }
                 }
             }
+        }
+    }
+    Connections {
+        target: Hyprland
+        // function onFocusedMonitorChanged(lala: HyprlandMonitor): void {
+        function onFocusedWorkspace(): void {
+            console.log("!!!!!!!!!!!!!lalal!!!!!!!!!!!!!");
         }
     }
 }

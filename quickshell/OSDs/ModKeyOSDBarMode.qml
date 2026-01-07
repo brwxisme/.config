@@ -11,7 +11,7 @@ Scope {
     id: root
 
     property string ctrl_clr: MyColor.pink
-    property string meta_clr: MyColor.yellow
+    property string meta_clr: MyColor.orange
     property string alt_clr: MyColor.blue
     property string bg_clr: MyColor.bg
 
@@ -37,8 +37,8 @@ Scope {
     }
     LazyLoader {
         id: ll
-        active: true
-        // active: root.pressed_mod.length != 0
+        // active: true
+        active: root.pressed_mod.length != 0
 
         Variants {
             model: Quickshell.screens
@@ -70,32 +70,32 @@ Scope {
                 // An empty click mask prevents the window from blocking mouse events.
                 mask: Region {}
                 // visible: root.pressed_mod.includes("META")
-                RowLayout {
-                    visible: false
-
-                    // anchors.fill: parent
-                    // Layout.fillWidth: parent
-                    spacing: 32
-                    anchors {
-                        left: parent.left
-                        right: parent.right
-                        bottom: parent.bottom
-                    }
-                    // anchors.bottomMargin: 0
-                    // anchors.bottom: parent.bottom
-                    ModBar {
-                        clr: root.meta_clr
-                        visible: root.pressed_mod.includes("META")
-                    }
-                    ModBar {
-                        clr: root.ctrl_clr
-                        visible: root.pressed_mod.includes("CTRL")
-                    }
-                    ModBar {
-                        clr: root.alt_clr
-                        visible: root.pressed_mod.includes("ALT")
-                    }
-                }
+                // RowLayout {
+                //     visible: false
+                //
+                //     // anchors.fill: parent
+                //     // Layout.fillWidth: parent
+                //     spacing: 32
+                //     anchors {
+                //         left: parent.left
+                //         right: parent.right
+                //         bottom: parent.bottom
+                //     }
+                //     // anchors.bottomMargin: 0
+                //     // anchors.bottom: parent.bottom
+                //     ModBar {
+                //         clr: root.meta_clr
+                //         visible: root.pressed_mod.includes("META")
+                //     }
+                //     ModBar {
+                //         clr: root.ctrl_clr
+                //         visible: root.pressed_mod.includes("CTRL")
+                //     }
+                //     ModBar {
+                //         clr: root.alt_clr
+                //         visible: root.pressed_mod.includes("ALT")
+                //     }
+                // }
                 RowLayout {
 
                     // width: 512

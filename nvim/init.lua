@@ -729,6 +729,7 @@ require('lazy').setup({
           -- gopls = {},
           -- pyright = {},
           rust_analyzer = {},
+          postgres_lsp = {},
           -- marksman = {
           --   cmd = { 'marksman' },
           -- },
@@ -803,48 +804,111 @@ require('lazy').setup({
       end
     end,
   },
-
-  { -- Autoformat
+  {
     'stevearc/conform.nvim',
-    event = { 'BufWritePre' },
+    -- event = { 'BufWritePre' },
+    lazy = false,
+    -- event = { 'BufReadPre', 'BufNewFile' },
+
     cmd = { 'ConformInfo' },
     keys = {
       {
         '<leader>f',
         function() require('conform').format { async = true, lsp_format = 'fallback' } end,
-        mode = '',
         desc = '[F]ormat buffer',
       },
     },
-    ---@module 'conform'
-    ---@type conform.setupOpts
+
     opts = {
       notify_on_error = false,
-      format_on_save = function(bufnr)
-        -- Disable "format_on_save lsp_fallback" for languages that don't
-        -- have a well standardized coding style. You can add additional
-        -- languages here or re-enable it for the disabled ones.
-        local disable_filetypes = { c = true, cpp = true }
-        if disable_filetypes[vim.bo[bufnr].filetype] then
-          return nil
-        else
-          return {
-            timeout_ms = 1500,
-            lsp_format = 'fallback',
-          }
-        end
-      end,
+      format_on_save = {
+        -- I recommend these options. See :help conform.format for details.
+        lsp_format = 'fallback',
+        timeout_ms = 2000,
+      },
+      -- If this is set, Conform will run the formatter asynchronously after save.
+      -- It will pass the table to conform.format().
+      -- This can also be a function that returns the table.
+      format_after_save = {
+        lsp_format = 'fallback',
+      },
+
+      -- format_on_save = function(bufnr)
+      --   if vim.bo[bufnr].filetype == 'gdscript' then
+      --     return nil
+      --   end
+      --
+      --   local disable = { c = true, cpp = true }
+      --   if disable[vim.bo[bufnr].filetype] then
+      --     return nil
+      --   end
+      --
+      --   return {
+      --     timeout_ms = 5500,
+      --     lsp_format = 'fallback',
+      --   }
+      -- end,
+
+      formatters = {
+        gdformat = {
+          command = 'gdformat',
+        },
+      },
+
       formatters_by_ft = {
         lua = { 'stylua' },
-        gdscript = { 'gdformat' },
-        -- Conform can also run multiple formatters sequentially
-        -- python = { "isort", "black" },
-        --
-        -- You can use 'stop_after_first' to run the first available formatter from the list
-        -- javascript = { "prettierd", "prettier", stop_after_first = true },
+        gdscript = { 'gdformat' }, -- manual only
       },
     },
   },
+  -- { -- Autoformat
+  --   'stevearc/conform.nvim',
+  --   evt = { 'BufWritePre' },
+  --
+  --   cmd = { 'ConformInfo' },
+  --   keys = {
+  --     {
+  --       '<leader>f',
+  --       function() require('conform').format { async = true, lsp_format = 'fallback' } end,
+  --       mode = '',
+  --       desc = '[F]ormat buffer',
+  --     },
+  --   },
+  --
+  --   ---@module 'conform'
+  --   ---@type conform.setupOpts
+  --   opts = {
+  --     notify_on_error = false,
+  --     format_on_save = function(bufnr)
+  --       -- Disable "format_on_save lsp_fallback" for languages that don't
+  --       -- have a well standardized coding style. You can add additional
+  --       -- languages here or re-enable it for the disabled ones.
+  --       local disable_filetypes = { c = true, cpp = true }
+  --       if disable_filetypes[vim.bo[bufnr].filetype] then
+  --         return nil
+  --       else
+  --         return {
+  --           timeout_ms = 2500,
+  --           lsp_format = 'fallback',
+  --         }
+  --       end
+  --     end,
+  --     formatters = {
+  --       gdformat = {
+  --         stdin = false, -- 🔑 CRITICAL FIX
+  --       },
+  --     },
+  --     formatters_by_ft = {
+  --       lua = { 'stylua' },
+  --       gdscript = { 'gdformat' },
+  --       -- Conform can also run multiple formatters sequentially
+  --       -- python = { "isort", "black" },
+  --       --
+  --       -- You can use 'stop_after_first' to run the first available formatter from the list
+  --       -- javascript = { "prettierd", "prettier", stop_after_first = true },
+  --     },
+  --   },
+  -- },
 
   { -- Autocompletion
     'saghen/blink.cmp',
@@ -1035,16 +1099,22 @@ require('lazy').setup({
       --  Check out: https://github.com/nvim-mini/mini.nvim
     end,
   },
+  -- {
+  --   'nvim-treesitter/nvim-treesitter',
+  --   lazy = false,
+  --   build = ':TSUpdate',
+  -- },
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
-    main = 'nvim-treesitter.configs', -- Sets main module to use for opts
+    main = 'nvim-treesitter.config', -- Sets main module to use for opts
+
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     ---@module 'nvim-treesitter'
     ---@type TSConfig
     ---@diagnostic disable-next-line: missing-fields
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'sql' },
+      ensure_installed = { 'sql', 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'sql' },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {

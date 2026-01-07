@@ -27,6 +27,7 @@ Shape {
     ShapePath {
         strokeWidth: 2
         strokeColor: r.borderColor
+
         fillColor: MyColor.bg // Optional: for filling the shape
 
         // Define the starting point of the path

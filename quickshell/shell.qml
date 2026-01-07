@@ -11,6 +11,8 @@ import "Sockets"
 import "OffsetCrosshair"
 import "WindowIndicator"
 
+// import "Background"
+
 ShellRoot {
     // Background {}
     // ClockBackground {}
@@ -77,4 +79,7 @@ ShellRoot {
         }
     }
     WindowIndicator {}
+    // DimAround {}
+    //
+    //
 }

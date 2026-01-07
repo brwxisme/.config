@@ -44,13 +44,11 @@ Singleton {
             // function onFocusedWorkspaceChanged(lalal: HyprlandWorkspace) {
             function onRawEvent(event: HyprlandEvent): void {
                 // function onFocusedMonitorChanged(lala: HyprlandMonitor): void {
-                console.log("NEW EVENT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                console.log(event.name);
+                // console.log("NEW EVENT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                // console.log(event.name);
+                //
                 const e_name = event.name;
                 const show = e_name.includes("workspace") || e_name.includes("mon");
-                if (e_name.includes("activewindowv2")){
-                    Globals.activeWindowChanged();
-                }
                 if (show) {
                     cmd_test.running = true;
                 } else if (e_name.includes("openwindow")) {
@@ -59,6 +57,9 @@ Singleton {
                     update_window_count.running = true;
                 } else if (e_name.includes("closewindow")) {
                     // Globals.windowKilled();
+                    update_window_count.running = true;
+                }
+                if (e_name.includes("activewindowv2")) {
                     update_window_count.running = true;
                 }
             }
@@ -74,7 +75,7 @@ Singleton {
             onStreamFinished: {
                 // root.time = this.text;
                 var x = JSON.parse(text);
-                console.log(x);
+                //console.log(x);
                 Globals.monitors[x.monitor] = x.windows != 0;
                 Globals.monitor_workspace_window_count = x.windows;
                 root.window_count[x.monitor] = x.windows;
@@ -100,6 +101,7 @@ Singleton {
                 console.log("DP ", root.window_count["DP-2"]);
                 console.log("HDMI ", root.window_count["HDMI-A-1"]);
                 Globals.showOnEmptyWorkspace();
+                Globals.activeWindowChanged();
             }
         }
     }
@@ -166,8 +168,8 @@ Singleton {
 
     function keypressed_from_socket(message: string) {
         var x = JSON.parse(message);
-        console.log(x.key);
-        console.log(x.pressed);
+        // console.log(x.key);
+        // console.log(x.pressed);
         if (x.pressed == "true") {
             root.modPressed(x.key);
         } else {
