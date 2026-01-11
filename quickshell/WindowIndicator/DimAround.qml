@@ -29,6 +29,7 @@ Scope {
             screen: modelData
             property HyprlandMonitor myMonitor: Hyprland.monitorFor(screen)
             property HyprlandWorkspace myWorkspace: myMonitor.activeWorkspace
+            property int ws_id: myMonitor.activeWorkspace.id
             property bool monitor_focus: myMonitor.focused
             property int pos_x: 0
             property int pos_y: 0
@@ -71,20 +72,38 @@ Scope {
                 //     }
                 //     get_pos.running = true;
                 // }
-                function onShowWorkspaces(value: string): void {
+                function onTiledWindowCountChanged(): void {
                     if (!pnl.monitor_focus) {
                         return;
                     }
-                    if (Globals.window_count[myMonitor.name] <= 1) {
+                    if (Globals.tiled_on_workspace[ws_id.toString()] == undefined || Globals.tiled_on_workspace[ws_id.toString()] <= 1) {
                         console.log("Cancel Dimaround on", myMonitor.name);
+
                         pnl.visible = false;
                         return;
                     }
                     get_pos.running = true;
                 }
+                // function onShowWorkspaces(value: string): void {
+                //     if (!pnl.monitor_focus) {
+                //         return;
+                //     }
+                //     if (Globals.window_count[myMonitor.name] <= 1) {
+                //         console.log("Cancel Dimaround on", myMonitor.name);
+                //         pnl.visible = false;
+                //         return;
+                //     }
+                //     get_pos.running = true;
+                // }
             }
             Connections {
                 target: pnl
+                function onMonitor_focusChanged(): void {
+                    console.log(pnl.myMonitor.name, " FOCUS CHANGED");
+                }
+                function onMyWorkspaceChanged(): void {
+                    console.log(pnl.myMonitor.name, " WS CHANGED");
+                }
                 function onScreenChanged(): void {
                     // 	// console.log(modelData.toString())
                     pos_x = pnl.screen.x;
@@ -102,6 +121,7 @@ Scope {
             Timer {
                 id: auto_hide
                 interval: 500
+
                 running: false
                 repeat: false
                 onTriggered: {
@@ -147,13 +167,6 @@ Scope {
                         if (pnl.show_me) {
                             pnl.visible = show_me;
                         }
-                        // console.log("===============");
-                        //.pnl.pos_x =  (txt.size[0]/2);
-                        //.pnl.pos_y =  (txt.size[1]/2);
-                        // if (txt.at[0] >.pnl.pos_x && txt.at[0] < root.pos_x + Math.abs(root) {
-                        // 	pnl.visible = true;
-                        // }
-
                     }
                 }
             }

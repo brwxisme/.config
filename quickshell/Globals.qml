@@ -18,6 +18,7 @@ Singleton {
     signal showBar(val: string)
     signal modPressed(val: string)
     signal modReleased(val: string)
+    signal tiledWindowCountChanged
 
     property var monitor_workspace_window_count
     property var monitors: {
@@ -27,6 +28,9 @@ Singleton {
     property var window_count: {
         "DP-2": 0,
         "HDMI-A-1": 0
+    }
+    property var tiled_on_workspace: {
+        "0": 0
     }
     property bool showingBar: false
 
@@ -48,9 +52,11 @@ Singleton {
                 // console.log(event.name);
                 //
                 const e_name = event.name;
+
                 const show = e_name.includes("workspace") || e_name.includes("mon");
                 if (show) {
                     cmd_test.running = true;
+                    update_tiled_count.running = true;
                 } else if (e_name.includes("openwindow")) {
                     // Globals.hideWorkspaces();
                     // Globals.showOnEmptyWorkspace();
@@ -102,6 +108,38 @@ Singleton {
                 console.log("HDMI ", root.window_count["HDMI-A-1"]);
                 Globals.showOnEmptyWorkspace();
                 Globals.activeWindowChanged();
+            }
+        }
+    }
+    Process {
+        id: update_tiled_count
+        command: ["hyprctl", "clients", "-j"]
+        running: true
+
+        stdout: StdioCollector {
+            onStreamFinished: {
+                var clients = JSON.parse(text);
+
+                root.tiled_on_workspace = {};
+
+                for (const win of clients) {
+                    // skip floating windows
+                    if (win.floating) {
+                        continue;
+                    }
+
+                    var wsId = win.workspace.id;
+
+                    // init counter if missing
+                    if (root.tiled_on_workspace[wsId] === undefined) {
+                        root.tiled_on_workspace[wsId] = 0;
+                    }
+
+                    root.tiled_on_workspace[wsId] += 1;
+                }
+
+                Globals.tiledWindowCountChanged();
+                // console.log("tiled_on_workspace:", JSON.stringify(root.tiled_on_workspace));
             }
         }
     }
