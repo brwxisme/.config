@@ -36,6 +36,7 @@ ShellRoot {
     // }
     // ModeOne {}
     Socket {}
+    DimAround {}
     ModeTwo {}
     Process {
         id: run_mod_keys
@@ -78,8 +79,8 @@ ShellRoot {
             run_mod_keys.running = true;
         }
     }
-    WindowIndicator {}
-    // DimAround {}
+    // WindowIndicator {}
+    // ShaderDim {}
     //
     //
 }

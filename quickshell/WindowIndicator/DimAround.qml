@@ -37,6 +37,8 @@ Scope {
             property int window_width: 0
             property int window_heigth: 0
 
+            property int window_border: 2
+
             property int screen_w: 0
             property int screen_h: 0
             property bool show_me: false
@@ -70,7 +72,12 @@ Scope {
                 //     get_pos.running = true;
                 // }
                 function onShowWorkspaces(value: string): void {
+                    if (!pnl.monitor_focus) {
+                        return;
+                    }
                     if (Globals.window_count[myMonitor.name] <= 1) {
+                        console.log("Cancel Dimaround on", myMonitor.name);
+                        pnl.visible = false;
                         return;
                     }
                     get_pos.running = true;
@@ -94,11 +101,11 @@ Scope {
             }
             Timer {
                 id: auto_hide
-                interval: 250
+                interval: 500
                 running: false
                 repeat: false
                 onTriggered: {
-                    visible = false;
+                    pnl.visible = false;
                     // console.log(pnl.screen.x);
                 }
             }
@@ -123,13 +130,15 @@ Scope {
                         // console.log.pnl.pnl.screen);
                         //.pnl.ll.v.pn.margins.left = txt.x;
                         // pn.margins.top = txt.y;
-                        pnl.window_x = (txt.at[0] - pnl.pos_x);
-                        pnl.window_y = (txt.at[1] - pnl.pos_y);
-                        pnl.window_width = txt.size[0];
-                        pnl.window_heigth = txt.size[1];
+                        pnl.window_width = txt.size[0] + (pnl.window_border * 2);
+                        pnl.window_heigth = txt.size[1] + (pnl.window_border * 2);
+                        // pnl.window_x = (txt.at[0] - pnl.pos_x);
+                        // pnl.window_y = (txt.at[1] - pnl.pos_y);
+                        pnl.window_x = (txt.at[0] - pnl.pos_x) - pnl.window_border;
+                        pnl.window_y = (txt.at[1] - pnl.pos_y) - pnl.window_border;
                         // pnl.window_x = (txt.at[0] - pnl.pos_x) + (txt.size[0] / 2);
                         // pnl.window_y = (txt.at[1] - pnl.pos_y) + (txt.size[1] / 2);
-                        pnl.show_me = pnl.window_x > pnl.pos_x && pnl.window_x < (pnl.screen_w + pnl.pos_x);
+                        // pnl.show_me = pnl.window_x > pnl.pos_x && pnl.window_x < (pnl.screen_w + pnl.pos_x);
                         // console.log(pnl.window_x , " x ", pnl.pos_x, " x ", pnl.window_x , " x ", (pnl.screen_w ));
                         // console.log(show_me);
                         pnl.visible = false;
@@ -150,20 +159,58 @@ Scope {
             }
 
             Canvas {
-
                 anchors.fill: parent
 
                 onPaint: {
                     var ctx = getContext("2d");
-                    ctx.fillStyle = "pink";
+                    ctx.reset();
+
+                    // 1️⃣ Draw dark overlay
+                    ctx.fillStyle = "rgba(0, 0, 0, 0.85)";
+                    ctx.fillRect(0, 0, width, height);
+
+                    // 2️⃣ Cut hole
+                    ctx.globalCompositeOperation = "destination-out";
+
+                    var x = pnl.window_x;
+                    var y = pnl.window_y;
+                    var w = pnl.window_width;
+                    var h = pnl.window_heigth;
+                    var r = 14; // radius
 
                     ctx.beginPath();
-                    ctx.fillRect(0, 0, pnl.screen.width, height);
-
-                    ctx.clearRect(pnl.window_x, pnl.window_y, pnl.window_width, pnl.window_heigth);
+                    ctx.moveTo(x + r, y);
+                    ctx.lineTo(x + w - r, y);
+                    ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+                    ctx.lineTo(x + w, y + h - r);
+                    ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+                    ctx.lineTo(x + r, y + h);
+                    ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+                    ctx.lineTo(x, y + r);
+                    ctx.quadraticCurveTo(x, y, x + r, y);
+                    ctx.closePath();
                     ctx.fill();
+
+                    // 3️⃣ Reset mode
+                    ctx.globalCompositeOperation = "source-over";
                 }
             }
+            // Canvas {
+            //
+            //     anchors.fill: parent
+            //
+            //     onPaint: {
+            //         var ctx = getContext("2d");
+            //         // ctx.fillStyle = "black";
+            //         ctx.fillStyle = Qt.rgba(0, 0, 0, 0.85);
+            //
+            //         ctx.beginPath();
+            //         ctx.fillRect(0, 0, pnl.screen.width, height);
+            //
+            //         ctx.clearRect(pnl.window_x, pnl.window_y, pnl.window_width, pnl.window_heigth);
+            //         ctx.fill();
+            //     }
+            // }
         }
     }
     Connections {
