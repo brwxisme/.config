@@ -40,7 +40,7 @@ vim.lsp.config('postgres_lsp', {
     },
   },
 })
-vim.lsp.enable { 'gdscript', 'gdshader_lsp', 'marksman', 'qmlls', 'postgres_lsp' }
+vim.lsp.enable { 'gdscript', 'gdshader_lsp', 'marksman', 'qmlls', 'postgres_lsp', 'ts_ls' }
 -- vim.lsp.qmlls = {
 --   enable = true,
 --   cmd = { 'qmlls', '-E' },
